@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<% include ./share/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/create-movie.css">
+
+    <title>Create new movie</title>
+
+    <body>
+        <div class="container-fluid">
+            <h1 class="text-center">CREATE NEW MOVIE</h1>
+
+
+            <div class="form-group col-lg-5 text-center">
+                <br>
+                <image class="img-responsive" id="cover" src="/images/cover.png"></image>
+                <input type="file" id="uploadFile">
+                <!-- <p class="help-block">Example block-level help text here.</p> -->
+                <button type="button" id="uploadButton" class="btn btn-primary my-btn">
+                    <i class="fa fa-file-image-o fa-lg"></i> Chọn hình minh họa</button>
+            </div>
+
+            <div class="container col-lg-7">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <select class="form-control" id="genre">
+                        <option label="Tiểu sử lịch sử" value="string:Tiểu sử lịch sử" selected="selected">Tiểu sử lịch sử</option>
+                        <option label="Lãng mạn tình cảm" value="string:Lãng mạn tình cảm">Lãng mạn tình cảm</option>
+                        <option label="Khoa học viễn tưởng" value="string:Khoa học viễn tưởng">Khoa học viễn tưởng</option>
+                        <option label="Huyền bí huyền ảo" value="string:Huyền bí huyền ảo">Huyền bí huyền ảo</option>
+                        <option label="Phiêu lưu mạo hiểm" value="string:Phiêu lưu mạo hiểm">Phiêu lưu mạo hiểm</option>
+                        <option label="Pháp luật hình sự" value="string:Pháp luật hình sự">Pháp luật hình sự</option>
+                        <option label="Chiến tranh cổ trang" value="string:Chiến tranh cổ trang">Chiến tranh cổ trang</option>
+                        <option label="Chiến tranh trung đại" value="string:Chiến tranh trung đại">Chiến tranh trung đại</option>
+                        <option label="Chiến tranh hiện đại" value="string:Chiến tranh hiện đại">Chiến tranh hiện đại</option>
+                        <option label="Kiếm hiệp, cổ trang" value="string:Kiếm hiệp, cổ trang">Kiếm hiệp, cổ trang</option>
+                        <option label="Thuyết minh" value="string:Thuyết minh">Thuyết minh</option>
+                        <option label="Hoạt hình" value="string:Hoạt hình">Hoạt hình</option>
+                        <option label="Ma, kinh dị" value="string:Ma, kinh dị">Ma, kinh dị</option>
+                        <option label="Kịch tính" value="string:Kịch tính">Kịch tính</option>
+                        <option label="Hành động" value="string:Hành động">Hành động</option>
+                        <option label="Sát nhân" value="string:Sát nhân">Sát nhân</option>
+                        <option label="Thể thao" value="string:Thể thao">Thể thao</option>
+                        <option label="Võ thuật" value="string:Võ thuật">Võ thuật</option>
+                        <option label="Tâm lý" value="string:Tâm lý">Tâm lý</option>
+                        <option label="Tội ác" value="string:Tội ác">Tội ác</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="release">Release Date</label>
+                    <div id="release" class="form-inline">
+                        <select class="form-control" id="month">
+                            <option label="Tháng 1" value="string:Tháng 1">Tháng 1</option>
+                            <option label="Tháng 2" value="string:Tháng 2">Tháng 2</option>
+                            <option label="Tháng 3" value="string:Tháng 3" selected="selected">Tháng 3</option>
+                            <option label="Tháng 4" value="string:Tháng 4">Tháng 4</option>
+                            <option label="Tháng 5" value="string:Tháng 5">Tháng 5</option>
+                            <option label="Tháng 6" value="string:Tháng 6">Tháng 6</option>
+                            <option label="Tháng 7" value="string:Tháng 7">Tháng 7</option>
+                            <option label="Tháng 8" value="string:Tháng 8">Tháng 8</option>
+                            <option label="Tháng 9" value="string:Tháng 9">Tháng 9</option>
+                            <option label="Tháng 10" value="string:Tháng 10">Tháng 10</option>
+                            <option label="Tháng 11" value="string:Tháng 11">Tháng 11</option>
+                            <option label="Tháng 12" value="string:Tháng 12">Tháng 12</option>
+                        </select>
+
+                        <select class="form-control" id="year">
+                            <option label="Năm 1900" value="string:Năm 1900">Năm 1900</option>
+                            <option label="Năm 1901" value="string:Năm 1901">Năm 1901</option>
+                            <option label="Năm 1902" value="string:Năm 1902">Năm 1902</option>
+                            <option label="Năm 1903" value="string:Năm 1903">Năm 1903</option>
+                            <option label="Năm 1904" value="string:Năm 1904">Năm 1904</option>
+                            <option label="Năm 1905" value="string:Năm 1905">Năm 1905</option>
+                            <option label="Năm 1906" value="string:Năm 1906">Năm 1906</option>
+                            <option label="Năm 1907" value="string:Năm 1907">Năm 1907</option>
+                            <option label="Năm 1908" value="string:Năm 1908">Năm 1908</option>
+                            <option label="Năm 1909" value="string:Năm 1909">Năm 1909</option>
+                            <option label="Năm 1910" value="string:Năm 1910">Năm 1910</option>
+                            <option label="Năm 1911" value="string:Năm 1911">Năm 1911</option>
+                            <option label="Năm 1912" value="string:Năm 1912">Năm 1912</option>
+                            <option label="Năm 1913" value="string:Năm 1913">Năm 1913</option>
+                            <option label="Năm 1914" value="string:Năm 1914">Năm 1914</option>
+                            <option label="Năm 1915" value="string:Năm 1915">Năm 1915</option>
+                            <option label="Năm 1916" value="string:Năm 1916">Năm 1916</option>
+                            <option label="Năm 1917" value="string:Năm 1917">Năm 1917</option>
+                            <option label="Năm 1918" value="string:Năm 1918">Năm 1918</option>
+                            <option label="Năm 1919" value="string:Năm 1919">Năm 1919</option>
+                            <option label="Năm 1920" value="string:Năm 1920">Năm 1920</option>
+                            <option label="Năm 1921" value="string:Năm 1921">Năm 1921</option>
+                            <option label="Năm 1922" value="string:Năm 1922">Năm 1922</option>
+                            <option label="Năm 1923" value="string:Năm 1923">Năm 1923</option>
+                            <option label="Năm 1924" value="string:Năm 1924">Năm 1924</option>
+                            <option label="Năm 1925" value="string:Năm 1925">Năm 1925</option>
+                            <option label="Năm 1926" value="string:Năm 1926">Năm 1926</option>
+                            <option label="Năm 1927" value="string:Năm 1927">Năm 1927</option>
+                            <option label="Năm 1928" value="string:Năm 1928">Năm 1928</option>
+                            <option label="Năm 1929" value="string:Năm 1929">Năm 1929</option>
+                            <option label="Năm 1930" value="string:Năm 1930">Năm 1930</option>
+                            <option label="Năm 1931" value="string:Năm 1931">Năm 1931</option>
+                            <option label="Năm 1932" value="string:Năm 1932">Năm 1932</option>
+                            <option label="Năm 1933" value="string:Năm 1933">Năm 1933</option>
+                            <option label="Năm 1934" value="string:Năm 1934">Năm 1934</option>
+                            <option label="Năm 1935" value="string:Năm 1935">Năm 1935</option>
+                            <option label="Năm 1936" value="string:Năm 1936">Năm 1936</option>
+                            <option label="Năm 1937" value="string:Năm 1937">Năm 1937</option>
+                            <option label="Năm 1938" value="string:Năm 1938">Năm 1938</option>
+                            <option label="Năm 1939" value="string:Năm 1939">Năm 1939</option>
+                            <option label="Năm 1940" value="string:Năm 1940">Năm 1940</option>
+                            <option label="Năm 1941" value="string:Năm 1941">Năm 1941</option>
+                            <option label="Năm 1942" value="string:Năm 1942">Năm 1942</option>
+                            <option label="Năm 1943" value="string:Năm 1943">Năm 1943</option>
+                            <option label="Năm 1944" value="string:Năm 1944">Năm 1944</option>
+                            <option label="Năm 1945" value="string:Năm 1945">Năm 1945</option>
+                            <option label="Năm 1946" value="string:Năm 1946">Năm 1946</option>
+                            <option label="Năm 1947" value="string:Năm 1947">Năm 1947</option>
+                            <option label="Năm 1948" value="string:Năm 1948">Năm 1948</option>
+                            <option label="Năm 1949" value="string:Năm 1949">Năm 1949</option>
+                            <option label="Năm 1950" value="string:Năm 1950">Năm 1950</option>
+                            <option label="Năm 1951" value="string:Năm 1951">Năm 1951</option>
+                            <option label="Năm 1952" value="string:Năm 1952">Năm 1952</option>
+                            <option label="Năm 1953" value="string:Năm 1953">Năm 1953</option>
+                            <option label="Năm 1954" value="string:Năm 1954">Năm 1954</option>
+                            <option label="Năm 1955" value="string:Năm 1955">Năm 1955</option>
+                            <option label="Năm 1956" value="string:Năm 1956">Năm 1956</option>
+                            <option label="Năm 1957" value="string:Năm 1957">Năm 1957</option>
+                            <option label="Năm 1958" value="string:Năm 1958">Năm 1958</option>
+                            <option label="Năm 1959" value="string:Năm 1959">Năm 1959</option>
+                            <option label="Năm 1960" value="string:Năm 1960">Năm 1960</option>
+                            <option label="Năm 1961" value="string:Năm 1961">Năm 1961</option>
+                            <option label="Năm 1962" value="string:Năm 1962">Năm 1962</option>
+                            <option label="Năm 1963" value="string:Năm 1963">Năm 1963</option>
+                            <option label="Năm 1964" value="string:Năm 1964">Năm 1964</option>
+                            <option label="Năm 1965" value="string:Năm 1965">Năm 1965</option>
+                            <option label="Năm 1966" value="string:Năm 1966">Năm 1966</option>
+                            <option label="Năm 1967" value="string:Năm 1967">Năm 1967</option>
+                            <option label="Năm 1968" value="string:Năm 1968">Năm 1968</option>
+                            <option label="Năm 1969" value="string:Năm 1969">Năm 1969</option>
+                            <option label="Năm 1970" value="string:Năm 1970">Năm 1970</option>
+                            <option label="Năm 1971" value="string:Năm 1971">Năm 1971</option>
+                            <option label="Năm 1972" value="string:Năm 1972">Năm 1972</option>
+                            <option label="Năm 1973" value="string:Năm 1973">Năm 1973</option>
+                            <option label="Năm 1974" value="string:Năm 1974">Năm 1974</option>
+                            <option label="Năm 1975" value="string:Năm 1975">Năm 1975</option>
+                            <option label="Năm 1976" value="string:Năm 1976">Năm 1976</option>
+                            <option label="Năm 1977" value="string:Năm 1977">Năm 1977</option>
+                            <option label="Năm 1978" value="string:Năm 1978">Năm 1978</option>
+                            <option label="Năm 1979" value="string:Năm 1979">Năm 1979</option>
+                            <option label="Năm 1980" value="string:Năm 1980">Năm 1980</option>
+                            <option label="Năm 1981" value="string:Năm 1981">Năm 1981</option>
+                            <option label="Năm 1982" value="string:Năm 1982">Năm 1982</option>
+                            <option label="Năm 1983" value="string:Năm 1983">Năm 1983</option>
+                            <option label="Năm 1984" value="string:Năm 1984">Năm 1984</option>
+                            <option label="Năm 1985" value="string:Năm 1985">Năm 1985</option>
+                            <option label="Năm 1986" value="string:Năm 1986">Năm 1986</option>
+                            <option label="Năm 1987" value="string:Năm 1987">Năm 1987</option>
+                            <option label="Năm 1988" value="string:Năm 1988">Năm 1988</option>
+                            <option label="Năm 1989" value="string:Năm 1989">Năm 1989</option>
+                            <option label="Năm 1990" value="string:Năm 1990">Năm 1990</option>
+                            <option label="Năm 1991" value="string:Năm 1991">Năm 1991</option>
+                            <option label="Năm 1992" value="string:Năm 1992">Năm 1992</option>
+                            <option label="Năm 1993" value="string:Năm 1993">Năm 1993</option>
+                            <option label="Năm 1994" value="string:Năm 1994">Năm 1994</option>
+                            <option label="Năm 1995" value="string:Năm 1995">Năm 1995</option>
+                            <option label="Năm 1996" value="string:Năm 1996">Năm 1996</option>
+                            <option label="Năm 1997" value="string:Năm 1997">Năm 1997</option>
+                            <option label="Năm 1998" value="string:Năm 1998">Năm 1998</option>
+                            <option label="Năm 1999" value="string:Năm 1999">Năm 1999</option>
+                            <option label="Năm 2000" value="string:Năm 2000">Năm 2000</option>
+                            <option label="Năm 2001" value="string:Năm 2001">Năm 2001</option>
+                            <option label="Năm 2002" value="string:Năm 2002">Năm 2002</option>
+                            <option label="Năm 2003" value="string:Năm 2003">Năm 2003</option>
+                            <option label="Năm 2004" value="string:Năm 2004">Năm 2004</option>
+                            <option label="Năm 2005" value="string:Năm 2005">Năm 2005</option>
+                            <option label="Năm 2006" value="string:Năm 2006">Năm 2006</option>
+                            <option label="Năm 2007" value="string:Năm 2007">Năm 2007</option>
+                            <option label="Năm 2008" value="string:Năm 2008">Năm 2008</option>
+                            <option label="Năm 2009" value="string:Năm 2009">Năm 2009</option>
+                            <option label="Năm 2010" value="string:Năm 2010">Năm 2010</option>
+                            <option label="Năm 2011" value="string:Năm 2011">Năm 2011</option>
+                            <option label="Năm 2012" value="string:Năm 2012">Năm 2012</option>
+                            <option label="Năm 2013" value="string:Năm 2013">Năm 2013</option>
+                            <option label="Năm 2014" value="string:Năm 2014">Năm 2014</option>
+                            <option label="Năm 2015" value="string:Năm 2015">Năm 2015</option>
+                            <option label="Năm 2016" value="string:Năm 2016">Năm 2016</option>
+                            <option label="Năm 2017" value="string:Năm 2017">Năm 2017</option>
+                            <option label="Năm 2018" value="string:Năm 2018" selected="selected">Năm 2018</option>
+                            <option label="Năm 2019" value="string:Năm 2019">Năm 2019</option>
+                            <option label="Năm 2020" value="string:Năm 2020">Năm 2020</option>
+                            <option label="Năm 2021" value="string:Năm 2021">Năm 2021</option>
+                            <option label="Năm 2022" value="string:Năm 2022">Năm 2022</option>
+                            <option label="Năm 2023" value="string:Năm 2023">Năm 2023</option>
+                            <option label="Năm 2024" value="string:Năm 2024">Năm 2024</option>
+                            <option label="Năm 2025" value="string:Năm 2025">Năm 2025</option>
+                            <option label="Năm 2026" value="string:Năm 2026">Năm 2026</option>
+                            <option label="Năm 2027" value="string:Năm 2027">Năm 2027</option>
+                            <option label="Năm 2028" value="string:Năm 2028">Năm 2028</option>
+                            <option label="Năm 2029" value="string:Năm 2029">Năm 2029</option>
+                            <option label="Năm 2030" value="string:Năm 2030">Năm 2030</option>
+                            <option label="Năm 2031" value="string:Năm 2031">Năm 2031</option>
+                            <option label="Năm 2032" value="string:Năm 2032">Năm 2032</option>
+                            <option label="Năm 2033" value="string:Năm 2033">Năm 2033</option>
+                            <option label="Năm 2034" value="string:Năm 2034">Năm 2034</option>
+                            <option label="Năm 2035" value="string:Năm 2035">Năm 2035</option>
+                            <option label="Năm 2036" value="string:Năm 2036">Năm 2036</option>
+                            <option label="Năm 2037" value="string:Năm 2037">Năm 2037</option>
+                            <option label="Năm 2038" value="string:Năm 2038">Năm 2038</option>
+                            <option label="Năm 2039" value="string:Năm 2039">Năm 2039</option>
+                            <option label="Năm 2040" value="string:Năm 2040">Năm 2040</option>
+                            <option label="Năm 2041" value="string:Năm 2041">Năm 2041</option>
+                            <option label="Năm 2042" value="string:Năm 2042">Năm 2042</option>
+                            <option label="Năm 2043" value="string:Năm 2043">Năm 2043</option>
+                            <option label="Năm 2044" value="string:Năm 2044">Năm 2044</option>
+                            <option label="Năm 2045" value="string:Năm 2045">Năm 2045</option>
+                            <option label="Năm 2046" value="string:Năm 2046">Năm 2046</option>
+                            <option label="Năm 2047" value="string:Năm 2047">Năm 2047</option>
+                            <option label="Năm 2048" value="string:Năm 2048">Năm 2048</option>
+                            <option label="Năm 2049" value="string:Năm 2049">Năm 2049</option>
+                            <option label="Năm 2050" value="string:Năm 2050">Năm 2050</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="textarea" class="form-control" id="description" rows="5" placeholder="Điền thông tin thêm về bộ phim, như diễn viên chính, nội dung bộ phim,..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+
+
+            <button type="button" class="btn btn-primary my-btn">
+                <i class="fa fa-upload fa-lg"></i> Upload Movie</button>
+            <button type="button" class="btn btn-primary my-btn">
+                <i class="fa fa-sign-in fa-lg"></i> You need sign in</button>
+        </div>
+    </body>
+
+</html>
