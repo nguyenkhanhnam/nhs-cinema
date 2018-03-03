@@ -1,0 +1,9 @@
+.cover {
+  border-radius: 20px;
+  opacity: 0.7;
+  margin: 20px;
+}
+
+.movie {
+  height: 300px;
+}

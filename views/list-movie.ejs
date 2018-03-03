@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<% include ./share/head.ejs %>
+
+    <link rel="stylesheet" href="/stylesheets/create-movie.css">
+
+    <title>List of movies</title>
+
+    <body>
+        <div class="container">
+            <% movieList.forEach(function(movie){%>
+                <div class="container col-lg-4 movie">
+                    <image class="img-responsive" class="cover" src=<%=movie.cover%>>
+                        <h2>
+                            <%= movie.title +" ("+movie.release+")" %>
+                        </h2>
+                </div>
+                <%});%>
+        </div>
+    </body>
+
+</html>
