@@ -9,13 +9,13 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 
-// My new require
+// MY REQUIRE
 
 //For routing
 var movie = require('./routes/movie');
 
-
-
+//For fileupload-express
+var fileUpload = require('express-fileupload');
 
 var app = express();
 
@@ -24,10 +24,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname,'public','images','favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -39,9 +39,27 @@ app.use('/users', users);
 // Create routing
 app.use('/movie', movie);
 
+app.use(fileUpload());
 
+app.get('/upload', function(req, res, next){
+  res.render('upload.ejs');
+});
 
-
+app.post('/upload', function(req, res, next) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+ 
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(__dirname+`/public/images/${sampleFile.name}`, function (err) {
+    if (err)
+      return res.status(500).send(err);
+ 
+    res.send('File uploaded!');
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

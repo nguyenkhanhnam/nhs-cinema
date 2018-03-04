@@ -3,17 +3,18 @@
 
 <% include ./share/head.ejs %>
 
-    <link rel="stylesheet" href="/stylesheets/create-movie.css">
+    <link rel="stylesheet" href="/stylesheets/list-movie.css">
 
-    <title>List of movies</title>
+    <title>Cinema</title>
 
     <body>
         <div class="container">
             <% movieList.forEach(function(movie){%>
-                <div class="container col-lg-4 movie">
-                    <image class="img-responsive" class="cover" src=<%=movie.cover%>>
-                        <h2>
-                            <%= movie.title +" ("+movie.release+")" %>
+                <div class="container col-lg-4 movie text-center">
+                    <image class="img-responsive cover" src=<%=movie.cover%>>
+                        <h2 class="info">
+                            <%= movie.title %>
+                                <!--<%= movie.title+" ("+movie.release+")" %>-->
                         </h2>
                 </div>
                 <%});%>

@@ -4,19 +4,13 @@
   width: 100%;
   opacity: 0.7;
   object-fit: cover;
-  /*border: solid black;*/
-
 }
 
 .movie {
   margin-bottom: 100px;
   height: 500px;
-  
 }
 
-.info {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  background-color: white;
+.title {
+  font-weight: bold;
 }

@@ -10,7 +10,7 @@ var movieList = [
     release: '1994-10',
     description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
     cover: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg'
-  }, 
+  },
   {
     title: 'The Godfather',
     genre: 'Crime',
@@ -43,12 +43,58 @@ var movieList = [
 
 router.get('/', function (req, res, next) {
   //res.send('respond with a resource');
-  res.render('list-movie.ejs', { movieList: movieList});
+  res.render('list-movie.ejs', { movieList: movieList });
+});
+
+router.get('/detail/:id', function (req, res, next) {
+  //res.send('respond with a resource');
+  res.render('movie-detail.ejs', { movie: movieList[req.params.id] });
 });
 
 router.get('/createMovie', function (req, res, next) {
   res.render('create-movie.ejs');
 });
 
+router.post('/createMovie', function (req, res, next) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  let sampleFile = req.files.sampleFile;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(__dirname + `/public/images/${sampleFile.name}`, function (err) {
+    if (err)
+      return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+  /* var newMovie = {
+     title: req.body.title,
+     genre: req.body.genre,
+     release: req.body.release,
+     description: req.body.description,
+   }
+   console.log(newMovie);
+ 
+   movieList.push(newMovie);*/
+
+  //res.send('Success');
+});
+
+/*router.post('/upload', function (req, res, next) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(__dirname+`/public/images/${sampleFile.name}`, function (err) {
+    if (err)
+      return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+});*/
 
 module.exports = router;
