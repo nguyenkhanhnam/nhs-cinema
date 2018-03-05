@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 
 
 // MY REQUIRE
@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res, next) {
   res.render('list-movie.ejs');
 });
-app.use('/users', users);
+app.use('/user', user);
 
 
 // For express-fileupload
