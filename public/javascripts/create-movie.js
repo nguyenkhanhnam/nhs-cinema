@@ -1,6 +1,23 @@
+var app = angular.module("app.movies");
+var genres =  ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', 'Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thriller', 'War', 'Western'];
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var years = [];
+var date = new Date();
+var thisYear = date.getFullYear();
+var thisMonth = date.getMonth();
+for (var i = 1985; i <= thisYear + 1; i++) {
+    years.push(i);
+}
 
+app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
+    $scope.appName = "Movie List";
+    $scope.genres = genres;
+    $scope.months = months;
+    $scope.years = years;
+}]);
 
 function uploadImage() {
+    
     document.getElementById('uploadFile').click();
 
     document.getElementById('uploadFile').addEventListener('change', function () {
@@ -16,22 +33,3 @@ function uploadImage() {
     })
 }
 
-/*function uploadMovie() {
-    var title = document.getElementById('title').value;
-    var genre = document.getElementById('genre').value;
-    var release = document.getElementById('release').value;
-    var description = document.getElementById('description').value;
-    var cover = document.getElementById('uploadFile').files[0];
-
-    var newMovie = {
-        title: title,
-        genre: genre,
-        release: release,
-        description: description,
-    }
-
-    console.log(newMovie);
-    $.post('/movie/createMovie', { newMovie: newMovie }).then(function (res) {
-        console.log(res);
-    })
-}*/

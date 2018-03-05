@@ -11,11 +11,7 @@ function getMovies(res) {
 };
 
 module.exports = function (app) {
-    app.get('/', function (req, res) {
-        res.render('list-movie');
-    });
-
-    app.get('/movie/all', function (req, res) {
+    app.get('/api/movie', function (req, res) {
         getMovies(res);
     });
 
@@ -25,12 +21,15 @@ module.exports = function (app) {
                 res.status(500).json(err);
             }
             else {
-                res.render('movie-detail.ejs', { movie: movie });
+                //window.location.href='/movie/detail/'+req.params.id;
+                res.json(movie);
+                //res.render('movie-detail.ejs', { movie: movie });
             }
         })
     });
 
     app.post('/api/movie/createMovie', function (req, res) {
+        console.log('creater');
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
 
@@ -58,11 +57,10 @@ module.exports = function (app) {
                         res.status(500).json(err);
                     }
                     else {
-                        getMovies(res);
+                        res.redirect('/');
                     }
                 })
             }
         });
-        //res.redirect('/movie');
     });
 }

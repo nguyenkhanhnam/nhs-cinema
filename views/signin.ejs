@@ -3,30 +3,44 @@
 
 <% include ./share/head.ejs %>
 
-    <link rel="stylesheet" href="/stylesheets/list-movie.css">
+  <link rel="stylesheet" href="/stylesheets/list-movie.css">
 
-    <title>Cinema</title>
+  <title>Cinema</title>
 
-    <body>
-        <div class="container">
-            <form>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email address">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Save password
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>
+  <body>
+    <div class="container">
+      <form>
+        <h1 class="text-center">SIGN IN</h1>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
+            </span>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email address">
+          </div>
         </div>
-    </body>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-key fa-lg" aria-hidden="true"></i>
+            </span>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Save password
+          </label>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
 
 </html>

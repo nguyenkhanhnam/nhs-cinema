@@ -10,7 +10,7 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
     });
 
     $scope.getDetail = function (movieId) {
-        window.location.href = '/api/movie/detail/'+movieId;
+        window.location.href = '/movie/detail/' + movieId;
     }
 }]);
 

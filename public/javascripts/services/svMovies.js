@@ -3,7 +3,7 @@ var app = angular.module("app.movies", []);
 app.factory("svMovies", ['$http', function ($http) {
     return {
         get: function () {
-            return $http.get('/movie/all');
+            return $http.get('/api/movie/');
         },
         getDetail: function (id) {
             return $http.get(`/api/movie/detail/${id}`);

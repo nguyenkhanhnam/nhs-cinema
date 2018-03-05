@@ -43,11 +43,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', index);
-app.use('/users', users);
-
-app.get('/list', function(req, res, next){
+app.get('/', function(req, res, next) {
   res.render('list-movie.ejs');
 });
+app.use('/users', users);
 
 
 // For express-fileupload
@@ -59,6 +58,10 @@ app.use('/movie', movie);
 
 app.get('/signin', function(req, res, next){
   res.render('signin');
+});
+
+app.get('/signup', function(req, res, next){
+  res.render('signup');
 });
 
 setupController(app);
