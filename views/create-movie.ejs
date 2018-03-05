@@ -38,13 +38,12 @@
 
                     <div class="form-group">
                         <label for="release">Release Date</label>
-                        <div id="release" class="form-inline" name="release">
+                        <div id="release" class="form-inline">
                             <select class="form-control" id="month" name="month">
-                                <option label={{month}} value=months.indexOf(month)++ ng-repeat="month in months"></option>
+                                <option label={{month}} value={{months.indexOf(month)}} ng-repeat="month in months| limitTo : 12 : 1 ">{{month}}</option>
                             </select>
-
-                            <select class="form-control" id="year">
-                                    <option label={{year}} value={{year}} ng-repeat="year in years"></option>
+                            <select class="form-control" id="year" name="year">
+                                    <option label={{year}} value={{year}} ng-repeat="year in years">{{year}}</option>
                             </select>
                         </div>
                     </div>

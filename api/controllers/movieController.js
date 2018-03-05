@@ -47,7 +47,7 @@ module.exports = function (app) {
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
-                    release: req.body.release,
+                    release: req.body.month+"-"+req.body.year,
                     description: req.body.description,
                     cover: `/images/${fileName}`
                 }
