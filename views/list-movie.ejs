@@ -4,23 +4,21 @@
 <% include ./share/head.ejs %>
 
     <link rel="stylesheet" href="/stylesheets/list-movie.css">
-    <script scr="/javascripts/list-movie.js"></script>
+    <script src="/javascripts/services/svMovies.js"></script>
+    <script src="/javascripts/list-movie.js"></script>
+    
     <title>Cinema</title>
 
     <body ng-controller="movieController">
-        <h1>{{appName}}</h1>
-        
-        <!--<div class="container">
-            <% movieList.forEach(function(movie){%>
-                <div class="container col-lg-4 movie text-center">
-                    <image class="img-responsive cover" src=<%=movie.cover%>>
+        <div class="container">
+                <div class="container col-lg-4 movie text-center"  ng-repeat="movie in movies" ng-click="getDetail(movie._id)">
+                    <image class="img-responsive cover" src={{movie.cover}}>
                         <h2 class="info">
-                            <%= movie.title %>-->
-                                <!--<%= movie.title+" ("+movie.release+")" %>-->
-                      <!--  </h2>
+                            {{movie.title}}
+                        </h2>
                 </div>
-                <%});%>
-        </div>-->
+      
+        </div>
     </body>
 
 </html>

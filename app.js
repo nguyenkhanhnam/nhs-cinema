@@ -45,6 +45,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', index);
 app.use('/users', users);
 
+app.get('/list', function(req, res, next){
+  res.render('list-movie.ejs');
+});
+
+
 // For express-fileupload
 app.use(fileUpload());
 

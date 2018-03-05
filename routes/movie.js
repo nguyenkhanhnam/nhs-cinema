@@ -44,12 +44,13 @@ var movieList = [
 router.get('/', function (req, res, next) {
   //res.send('respond with a resource');
   res.render('list-movie.ejs', { movieList: movieList });
-});
+})
 
-router.get('/detail/:id', function (req, res, next) {
+/*router.get('/detail/:id', function (req, res, next) {
   //res.send('respond with a resource');
+
   res.render('movie-detail.ejs', { movie: movieList[req.params.id] });
-});
+});*/
 
 router.get('/createMovie', function (req, res, next) {
   res.render('create-movie.ejs');

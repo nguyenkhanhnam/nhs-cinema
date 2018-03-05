@@ -12,6 +12,10 @@ function getMovies(res) {
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
+        res.render('list-movie');
+    });
+
+    app.get('/movie/all', function (req, res) {
         getMovies(res);
     });
 
@@ -21,7 +25,7 @@ module.exports = function (app) {
                 res.status(500).json(err);
             }
             else {
-                res.json(movie);
+                res.render('movie-detail.ejs', { movie: movie });
             }
         })
     });
