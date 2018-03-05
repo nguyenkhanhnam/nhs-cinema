@@ -56,6 +56,33 @@ router.get('/createMovie', function (req, res, next) {
 });
 
 router.post('/createMovie', function (req, res, next) {
+  console.log(req.body);
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(`D:\\nhs\\nhs-cinema\\public\\images\\${sampleFile.name}`, function (err) {
+    if (err)
+      return res.status(500).send(err);
+  });
+
+  var newMovie = {
+    title: req.body.title,
+    genre: req.body.genre,
+    release: req.body.release,
+    description: req.body.description,
+    cover: `/images/${sampleFile.name}`
+  }
+
+  movieList.push(newMovie);
+
+  res.redirect('/movie');
+});
+
+/*router.post('/createMovie', function (req, res, next) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
@@ -68,7 +95,7 @@ router.post('/createMovie', function (req, res, next) {
 
     res.send('File uploaded!');
   });
-  /* var newMovie = {
+   var newMovie = {
      title: req.body.title,
      genre: req.body.genre,
      release: req.body.release,
@@ -76,10 +103,10 @@ router.post('/createMovie', function (req, res, next) {
    }
    console.log(newMovie);
  
-   movieList.push(newMovie);*/
+   movieList.push(newMovie);
 
-  //res.send('Success');
-});
+  res.send('Success');
+});*/
 
 /*router.post('/upload', function (req, res, next) {
   if (!req.files)

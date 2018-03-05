@@ -10,23 +10,18 @@
 
     <body>
         <form ref='uploadForm' id='uploadForm' action='/movie/createMovie' method='post' encType="multipart/form-data">
-            <input type="file" name="sampleFile" />
-            <input type='submit' value='Upload!' />
-        </form>
-
-        <form ref='uploadForm' id='uploadForm' action='/movie/createMovie' method='post' encType="multipart/form-data">
             <div class="container-fluid">
 
                 <h1 id="main" class="text-center">CREATE NEW MOVIE</h1>
 
                 <div class="container form-group col-lg-5 text-center">
                     <image class="img-responsive" id="cover" src="/images/cover.png"></image>
-                    <input type="file" id="uploadFile">
+                    <input type="file" id="uploadFile" name="sampleFile">
                     <!-- <p class="help-block">Example block-level help text here.</p> -->
                     <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
                         <i class="fa fa-file-image-o fa-lg"></i> Chọn hình minh họa</button>
                 </div>
-                <!--
+
                 <div class="container col-lg-7">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -239,7 +234,7 @@
                 </div>
 
             </div>
-            <div class="text-center">-->
+            <div class="text-center">
 
 
                 <button type="submit" class="btn btn-primary my-btn">

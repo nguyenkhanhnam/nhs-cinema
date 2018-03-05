@@ -16,7 +16,7 @@ function uploadImage() {
     })
 }
 
-function uploadMovie() {
+/*function uploadMovie() {
     var title = document.getElementById('title').value;
     var genre = document.getElementById('genre').value;
     var release = document.getElementById('release').value;
@@ -34,4 +34,4 @@ function uploadMovie() {
     $.post('/movie/createMovie', { newMovie: newMovie }).then(function (res) {
         console.log(res);
     })
-}
+}*/
