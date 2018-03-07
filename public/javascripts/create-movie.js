@@ -16,15 +16,10 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
     $scope.months = months;
     $scope.years = years;
     $scope.thisYear = thisYear;
-
-
-
 }]);
 
 function uploadImage() {
-
     document.getElementById('uploadFile').click();
-
     document.getElementById('uploadFile').addEventListener('change', function () {
         var reader = new FileReader();
 

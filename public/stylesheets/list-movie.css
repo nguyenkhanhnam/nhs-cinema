@@ -31,8 +31,8 @@ html, body {
 }
 .wrapper {
   min-height: 100%;
-  margin-bottom: -100px;
-  padding-bottom: 100px;
+  margin-bottom: -50px;
+  padding-bottom: 50px;
 }
 
 .navbar {
@@ -58,7 +58,7 @@ a {
 #footer {
   width: 100%;
   text-align: center;
-  height: 100px;
+  height: 20px;
 }
 
 #logo {

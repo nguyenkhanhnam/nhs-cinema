@@ -12,7 +12,8 @@ var user = require('./routes/user');
 // MY REQUIRE
 //For api
 var setupController = require('./api/controllers/setupController');
-var movieController = require('./api/controllers/movieController')
+var movieController = require('./api/controllers/movieController');
+var userController = require('./api/controllers/userController');
 
 //For routing
 var movie = require('./routes/movie');
@@ -28,6 +29,9 @@ mongoose.connect('mongodb://test:123@ds251588.mlab.com:51588/nam-cinema-db', fun
   console.log("MLab connected");
 });
 
+//For express-session
+var session = require('express-session');
+
 var app = express();
 
 // view engine setup
@@ -42,8 +46,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
+
+
+
+
+
+
 //app.use('/', index);
-app.get('/', function(req, res, next) {
+app.get('/', function (req, res, next) {
   res.render('list-movie.ejs');
 });
 app.use('/user', user);
@@ -56,16 +74,22 @@ app.use(fileUpload());
 app.use('/movie', movie);
 
 
-app.get('/signin', function(req, res, next){
+
+app.get('/signin', function (req, res, next) {
   res.render('signin');
 });
 
-app.get('/signup', function(req, res, next){
+app.get('/signup', function (req, res, next) {
   res.render('signup');
+});
+
+app.get('/profile', function (req, res, next) {
+  res.render('user-profile');
 });
 
 setupController(app);
 movieController(app);
+userController(app);
 
 
 /*app.post('/movie/createMovie', function (req, res, next) {
@@ -93,6 +117,43 @@ movieController(app);
 
   console.log(newMovie);
 });*/
+
+
+
+
+
+
+
+//var Users = require("../models/userModel");
+
+/*var connStr = 'mongodb://localhost:27017/mongoose-bcrypt-test';
+mongoose.connect(connStr, function(err) {
+    if (err) throw err;
+    console.log('Successfully connected to MongoDB');
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

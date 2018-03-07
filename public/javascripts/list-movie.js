@@ -9,10 +9,26 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         alert(error);
     });
 
+
+
     $scope.getDetail = function (movieId) {
         window.location.href = '/movie/detail/' + movieId;
     }
 }]);
+
+function meow() {
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+        });
+    });
+}
+
+
+
+
+
+
 
 /*app.factory("svMovies", ['$http', function ($http) {
     return {

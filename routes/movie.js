@@ -55,7 +55,7 @@ router.get('/createMovie', function (req, res, next) {
   res.render('create-movie.ejs');
 });
 
-router.post('/createMovie', function (req, res, next) {
+/*router.post('/createMovie', function (req, res, next) {
   console.log(req.body);
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
@@ -80,7 +80,7 @@ router.post('/createMovie', function (req, res, next) {
   movieList.push(newMovie);
 
   res.redirect('/movie');
-});
+});*/
 
 /*router.post('/createMovie', function (req, res, next) {
   if (!req.files)
