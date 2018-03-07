@@ -4,9 +4,9 @@
 <% include ./share/head.ejs %>
 
     <link rel="stylesheet" href="/stylesheets/list-movie.css">
-    <!--<script src="/javascripts/signup.js"></script>-->
+    <script src="/javascripts/user-profile.js"></script>
 
-    <title>Sign up</title>
+    <title>User profile</title>
 
     <body>
         <div id="header">
@@ -56,108 +56,65 @@
                 <!-- /.container-fluid -->
             </nav>
         </div>
-        <div class="container">
-            <form ref='uploadForm' id='uploadForm' action='/api/user/signup' method='post'>
+
+        <form ref='uploadForm' id='uploadForm' action='/api/user/' method='post' encType="multipart/form-data">
+            <div class="container-fluid">
                 <h1 class="text-center row">USER PROFILE</h1>
-                <form>
-                    <div class="col-sm" style="width: 50%">
-                        <h3 class="text-center">Personal Information</h3>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="email" class="form-control" id="email" disabled placeholder="Email address">
-                            </div>
+
+                <div class="container col-lg-7">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="email" class="form-control" id="email" disabled placeholder="Email address" value=<%=user.email%>>
                         </div>
-                        <div class="form-group">
-                            <label for="username">User name</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="username" placeholder="User Name">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">User name</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="User Name" value=<%=user.username%>>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Phone number</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-phone-square fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="phone" placeholder="Phone number">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Profile picture</label>
-                            <br>
-                            <div class="text-center">
-                                <image style="border-radius: 50%; width: 100px; height: 100px; display: inline;" class="img-responsive" id="cover" src="/images/cover.png"></image>
-                                <input style="display: none;" type="file" id="uploadFile" name="sampleFile" required="required">
-                                <!-- <p class="help-block">Example block-level help text here.</p> -->
-                                <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
-                                    <i class="fa fa-file-image-o fa-lg"></i> Chọn hình minh họa</button>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone-square fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone number" value=<%=user.phone%>>
                         </div>
                     </div>
 
-                    <div class="col-sm" style="width: 50%">
-                        <h3 class="text-center">Social network</h3>
-                        <div class="form-group">
-                            <label for="facebook">Facebook</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="facebook" placeholder="Facebook">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="google">Google+ ID</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="google" placeholder="Google+ ID">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="skype">Skype</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-skype fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="skype" placeholder="Skype">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website/Blog</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-external-link fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="website" placeholder="Website/Blog">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="twitter">Twitter</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" id="twitter" placeholder="Twitter">
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-
+                <div class="container form-group col-lg-5 text-center">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Save</button>
+                        <image style="object-fit:cover; border-radius: 50%; width: 200px; height: 200px; display: inline;" class="img-responsive"
+                            id="avatar" src=<%=user.avatar%>></image>
+                        <input style="display: none;" type="file" id="uploadFile" name="sampleFile">
+                        <br>
+                        <br>
+                        <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
+                            <i class="fa fa-file-image-o fa-lg"></i> Choose profile picture</button>
                     </div>
-                </form>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Save</button>
+                </div>
+                <br>
+            </div>
+        </form>
+        <div id="footer">
+            <footer>Copyright &copy; Cinema Website 2018 </footer>
         </div>
+
     </body>
 
 </html>

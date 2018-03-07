@@ -83,8 +83,18 @@ app.get('/signup', function (req, res, next) {
   res.render('signup');
 });
 
-app.get('/profile', function (req, res, next) {
-  res.render('user-profile');
+// GET /logout
+app.get('/signout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
 });
 
 setupController(app);

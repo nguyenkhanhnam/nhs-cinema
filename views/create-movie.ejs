@@ -34,15 +34,15 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
+                            <li id="create">
                                 <a href="/movie/createMovie">
                                     <i class="fa fa-upload" aria-hidden="true"></i> CREATE NEW MOVIE</a>
                             </li>
-                            <li>
+                            <li id="signin">
                                 <a href="/signin">
                                     <i class="fa fa-sign-in" aria-hidden="true"></i> SIGN IN</a>
                             </li>
-                            <li>
+                            <li id="signup">
                                 <a href="/signup">
                                     <i class="fa fa-user-plus" aria-hidden="true"></i> SIGN UP</a>
                             </li>
@@ -63,7 +63,7 @@
                     <input type="file" id="uploadFile" name="sampleFile" required="required">
                     <!-- <p class="help-block">Example block-level help text here.</p> -->
                     <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
-                        <i class="fa fa-file-image-o fa-lg"></i> Chọn hình minh họa</button>
+                        <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
                 </div>
 
                 <div class="container col-lg-7">
@@ -99,14 +99,15 @@
 
             </div>
             <div class="text-center">
-
-
                 <button type="submit" class="btn btn-primary my-btn">
                     <i class="fa fa-upload fa-lg"></i> Upload Movie</button>
-                <button type="button" class="btn btn-primary my-btn">
-                    <i class="fa fa-sign-in fa-lg"></i> You need sign in</button>
+                <!--<button type="button" class="btn btn-primary my-btn">
+                    <i class="fa fa-sign-in fa-lg"></i> You need sign in</button>-->
             </div>
         </form>
+        <div id="footer">
+            <footer>Copyright &copy; Cinema Website 2018 </footer>
+        </div>
     </body>
 
 </html>

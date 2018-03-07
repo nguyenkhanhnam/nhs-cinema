@@ -9,7 +9,25 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         console.log(res);
     }, function (error) {
         alert(error);
-    });    
+    });
+    
+    svMovies.getUser().then(function (res) {
+        $scope.user = res.data;
+        if ($scope.user != null) {
+            $('#create').show();
+            $('#signin').hide();
+            $('#signup').hide();
+        }
+        else {
+            $('#create').hide();
+            $('#signin').show();
+            $('#signup').show();
+        }
+        console.log(res);
+    }, function (error) {
+        //alert(error);
+    });
+    
 }]);
 
 

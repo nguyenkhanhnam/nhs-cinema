@@ -7,12 +7,15 @@ var Users = require('../api/models/userModel');
   res.send('respond with a resource');
 });*/
 
+router.get('/', function (req, res, next) {
+  res.json({session: req.session});
+});
+
 router.get('/signup', function (req, res, next) {
   res.render('signup.ejs');
 });
 
 router.get('/profile', function (req, res, next) {
-  console.log(req.session);
   Users.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -23,7 +26,8 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          res.render('user-profile', {user: user});
+          //return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
     });

@@ -10,6 +10,9 @@ app.factory("svMovies", ['$http', function ($http) {
         },
         create: function (newMovie) {
             return $http.post('/api/movie/createMovie', newMovie);
+        },
+        getUser: function (id) {
+            return $http.get(`/api/user/`);
         }
     }
 }]);

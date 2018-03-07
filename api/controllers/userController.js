@@ -9,7 +9,9 @@ module.exports = function (app) {
             var userData = {
                 email: req.body.email,
                 username: req.body.username,
-                password: req.body.password
+                password: req.body.password,
+                phone: null,
+                avatar: '/images/avatar-user.png'
                 /*passwordConf: req.body.passwordConf*/
             }
             //use schema.create to insert data into the db
@@ -19,46 +21,81 @@ module.exports = function (app) {
                 } else {
                     req.session.userId = user._id;
                     console.log(req.session);
-                    return res.redirect('/user/profile');
+                    return res.redirect('/');
                 }
             });
         }
-        //return res.status(500).json({err: "Empty"});
+    });
 
-        /*if (!req.files)
-            return res.status(400).send('No files were uploaded.');
 
-        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-        let sampleFile = req.files.sampleFile;
+    //authenticate input against database
+    app.post('/api/user/signin', function (req, res) {
+        Users.authenticate(req.body.email, req.body.password, function (error, user) {
+            if (error || !user) {
+                var err = new Error('Wrong email or password.');
+                err.status = 401;
+                res.status(401).json({ err: "Wrong email or password" });
+            } else {
+                req.session.userId = user._id;
+                return res.redirect('/');
+            }
+        });
+    });
 
-        var fileName = new Date().getTime() + "_" + sampleFile.name;
-
-        // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
+    //get user from database
+    app.get('/api/user/', function (req, res) {
+        Users.findById(req.session.userId, function (err, user) {
             if (err) {
-                return res.status(500).send(err);
+                res.status(500).json(err);
             }
             else {
-                var newMovie = {
-                    title: req.body.title,
-                    genre: req.body.genre,
-                    release: req.body.month+"-"+req.body.year,
-                    description: req.body.description,
-                    cover: `/images/${fileName}`
-                }
+                res.json(user);
+            }
+        })
+    });
 
-                Movies.create(newMovie, function (err) {
+    //update user info
+    app.post('/api/user/', function (req, res) {
+        console.log('update');
+        Users.findById(req.session.userId, function (err, user) {
+            if (err) {
+                res.status(500).json(err);
+            }
+            else {
+                if (req.body.username != "") {
+                    user.set({ username: req.body.username });
+                }
+                if (req.body.phone != "") {
+                    user.set({ phone: req.body.phone });
+                }
+                /*if (req.files) {
+                    let sampleFile = req.files.sampleFile;
+
+                    var fileName = new Date().getTime() + "_" + sampleFile.name;
+                    console.log(fileName);
+
+                    // Use the mv() method to place the file somewhere on your server
+                    sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
+                        if (err) {
+                            console.log(fileName);
+                            return res.status(500).json(err);
+                        }
+                        else {
+                            console.log('set');
+                            user.set({ avatar: '/images/'+fileName });
+                        }
+                    });
+                }*/
+
+                user.save(function (err, updatedUser) {
                     if (err) {
                         res.status(500).json(err);
                     }
                     else {
-                        res.redirect('/');
+                        return res.redirect('/user/profile');
                     }
-                })
+                });
             }
-        });*/
+        })
     });
-
-    //authenticate input against database
-
 }

@@ -6,3 +6,7 @@ body {
   padding: 0px 50px;
   font: 14px;
 }
+
+.my-btn {
+  margin-bottom: 20px !important;
+}

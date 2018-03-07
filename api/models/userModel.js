@@ -23,19 +23,15 @@ var userSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }
-    /*phone: String,
-    avatar: String,
-    facebook: String,
-    google: String,
-    skype: String,
-    website: String,
-    twitter: String*/
+    },
+    phone: Number,
+    avatar: String
 })
 
 //hashing a password before saving it to the database
 userSchema.pre('save', function (next) {
     var user = this;
+    if (!user.isModified('password')) return next();
     bcrypt.hash(user.password, SALT_WORK_FACTOR, function (err, hash) {
         if (err) {
             return next(err);

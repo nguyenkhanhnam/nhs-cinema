@@ -16,6 +16,23 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
     $scope.months = months;
     $scope.years = years;
     $scope.thisYear = thisYear;
+
+    svMovies.getUser().then(function (res) {
+        $scope.user = res.data;
+        if ($scope.user != null) {
+            $('#create').hide();
+            $('#signin').hide();
+            $('#signup').hide();
+        }
+        else {
+            $('#create').hide();
+            $('#signin').show();
+            $('#signup').show();
+        }
+        console.log(res);
+    }, function (error) {
+        //alert(error);
+    });
 }]);
 
 function uploadImage() {
