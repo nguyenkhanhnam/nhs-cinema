@@ -6,6 +6,7 @@ Follow these instructions, you will able to run this project on your local machi
 
 ### Prerequisites
 First, you need to install Node.js®. You can download from [here](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi).
+
 You also need a code editor to modify the source code. You can pick any code editor, but I sincerely recommend [Visual Studio Code](https://code.visualstudio.com/).
 
 ### Installing
@@ -33,6 +34,17 @@ To create your app, e.g. myapp, and specify `EJS` template engines with `express
 ```
 express --view=ejs myapp
 ```
+Navigate to your app's folder, and run the app
+```
+cd myapp
+npm start
+```
+Runs the app in the development mode. <br>
+Open http://localhost:3000 to view it in the browser.
+
+The page will reload if you make edits. <br>
+You will also see any lint errors in the console.
+
 ## Deployment 
 
 ### Heroku 
