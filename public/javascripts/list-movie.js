@@ -43,18 +43,36 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
     var search;
     $(document).ready(function () {
         search = document.getElementById("search");
+        $("#search").change(function(){
+            filterMovie();
+        })
         search.onkeyup = filterMovie;
+        //search.onkeydown = filterMovie;
+        //search.onchange = filterMovie;
     });
 
 
     function filterMovie() {
-        var searchPattern = new RegExp('^' + search.value, 'i');
+        console.log($scope.movies);
+        if (search.value == "") {
+            svMovies.get().then(function (res) {
+                $scope.movies = res.data;
+                //console.log(res);
+            }, function (error) {
+                alert(error);
+            });
+            return;
+        }
+        console.log(search.value);
+        var searchPattern = new RegExp(search.value, "i");
+        //var searchPattern = new RegExp('^' + search.value, 'i');
         for (var i = $scope.movies.length - 1; i >= 0; i--) {
-            if (!searchPattern.test($scope.movies[i].title)) {
+            if ($scope.movies[i].title.search(searchPattern) == -1) {
                 $scope.movies.splice(i, 1);
             }
-            //console.log($scope.movies);
         }
+        console.log($scope.movies);
+        
     }
 }]);
 
