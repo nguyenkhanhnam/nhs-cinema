@@ -21,4 +21,5 @@ $(document).ready(function () {
     $('#signup').hide();
     $('#change').show();
     $('#signout').show();
+    $('#greeting').html("Welcome "+ $("#username").val());   
 });

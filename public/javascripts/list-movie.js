@@ -43,8 +43,9 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
     var search;
     $(document).ready(function () {
         search = document.getElementById("search");
-        search.onchange = filterMovie;
+        search.onkeyup = filterMovie;
     });
+
 
     function filterMovie() {
         var searchPattern = new RegExp('^' + search.value, 'i');

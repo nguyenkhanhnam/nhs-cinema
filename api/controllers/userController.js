@@ -90,18 +90,32 @@ module.exports = function (app) {
         //console.log('update');
         Users.findById(req.session.userId, function (err, user) {
             if (err) {
-                res.status(500).json(err);
+                //console.log("err by id");
+                //console.log(req.session);
+                res.status(500).json({ err });
             }
             else {
-                if (req.body.username != "") {
-                    user.set({ username: req.body.username });
+                if (req.files.sampleFile === undefined) {
+                    if (req.body.username != "") {
+                        user.set({ username: req.body.username });
+                    }
+
+                    if (req.body.phone != "") {
+                        user.set({ phone: req.body.phone });
+                    }
+                    //console.log(req.files.sampleFile);
+                    user.save(function (err, updatedUser) {
+                        if (err) {
+                            res.status(500).json(err);
+                        }
+                        else {
+                            return res.redirect('/user/profile');
+                        }
+                    });
                 }
 
-                if (req.body.phone != "") {
-                    user.set({ phone: req.body.phone });
-                }
-
-                if (req.files) {
+                else {
+                    //console.log("have file?");
                     if (req.body.username != "") {
                         user.set({ username: req.body.username });
                     }
@@ -133,16 +147,6 @@ module.exports = function (app) {
                                 }
                             });
 
-                        }
-                    });
-                }
-                if (!req.files) {
-                    user.save(function (err, updatedUser) {
-                        if (err) {
-                            res.status(500).json(err);
-                        }
-                        else {
-                            return res.redirect('/user/profile');
                         }
                     });
                 }

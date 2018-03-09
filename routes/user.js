@@ -16,7 +16,7 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.get('/changePassword', function(req, res, next){
-  res.render('change-password');
+  res.render('change-password', {session: req.session});
 });
 
 router.get('/profile', function (req, res, next) {

@@ -44,7 +44,7 @@
                             <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i> CHANGE PASSWORD</a>
                     </li>
                     <li id="signout">
-                        <a href="/signout">
+                        <a href="#" data-toggle="modal" data-target="#signoutModal">
                             <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> SIGN OUT</a>
                     </li>
                 </ul>
@@ -53,4 +53,30 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+</div>
+
+<div class="modal" id="signoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>-->
+                <h3>Sign out</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                    </i> Are you sure you want to sign out of your account?
+                    <br />
+                </p>
+                <div class="actionsBtns">
+                    <a href="/signout" class="pull-right">
+                        <button class="btn btn-default btn-danger">
+                            <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Sign out</button>
+                    </a>
+                    <button class="btn btn-default btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
