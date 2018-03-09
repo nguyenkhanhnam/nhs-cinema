@@ -18,6 +18,7 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
             $('#signup').hide();
             $('#change').hide();
             $('#signout').hide();
+            $("#search-btn").hide();
         }
         else {
             $('#create').hide();
@@ -25,6 +26,7 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
             $('#signup').show();
             $('#change').hide();
             $('#signout').hide();
+            $("#search-btn").hide();
         }
         //console.log(res);
     }, function (error) {
@@ -53,7 +55,6 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
 
 
     function filterMovie() {
-        console.log($scope.movies);
         if (search.value == "") {
             svMovies.get().then(function (res) {
                 $scope.movies = res.data;
@@ -63,7 +64,7 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
             });
             return;
         }
-        console.log(search.value);
+        //console.log(search.value);
         var searchPattern = new RegExp(search.value, "i");
         //var searchPattern = new RegExp('^' + search.value, 'i');
         for (var i = $scope.movies.length - 1; i >= 0; i--) {
@@ -71,8 +72,7 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
                 $scope.movies.splice(i, 1);
             }
         }
-        console.log($scope.movies);
-        
+        $("#search-btn").click();
     }
 }]);
 
