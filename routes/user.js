@@ -15,6 +15,10 @@ router.get('/signup', function (req, res, next) {
   res.render('signup.ejs');
 });
 
+router.get('/changePassword', function(req, res, next){
+  res.render('change-password');
+});
+
 router.get('/profile', function (req, res, next) {
   Users.findById(req.session.userId)
     .exec(function (error, user) {

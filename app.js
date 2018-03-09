@@ -55,9 +55,8 @@ app.use(session({
   saveUninitialized: false
 }));
 
-
-
-
+// For express-fileupload
+app.use(fileUpload());
 
 
 //app.use('/', index);
@@ -66,9 +65,6 @@ app.get('/', function (req, res, next) {
 });
 app.use('/user', user);
 
-
-// For express-fileupload
-app.use(fileUpload());
 
 // Create routing
 app.use('/movie', movie);

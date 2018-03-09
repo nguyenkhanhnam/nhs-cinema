@@ -46,7 +46,7 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
 
     $(document).ready(function () {
         search = document.getElementById("search");
-        search.onkeypress = filterMovie;
+        search.onchange = filterMovie;
     });
 
 

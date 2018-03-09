@@ -42,8 +42,38 @@ module.exports = function (app) {
         });
     });
 
+    //change user's password
+    app.post('/api/user/changepassword', function (req, res) {
+        Users.findById(req.session.userId, function (err, user) {
+            if (err) {
+                res.status(500).json({ err: "userId not found" });
+            }
+            else {
+                Users.authenticate(user.email, req.body.current_password, function (error, user) {
+                    if (error || !user) {
+                        console.log(req.body.current_password)
+                        var err = new Error('Wrong email or password.');
+                        err.status = 401;
+                        res.status(401).json({ err: "Wrong email or password" });
+                    } else {
+                        user.set({ password: req.body.password });
+                        user.save(function (err, updatedUser) {
+                            if (err) {
+                                res.status(500).json(err);
+                            }
+                            else {
+                                return res.redirect('/user/profile');
+                            }
+                        });
+                    }
+                });
+            }
+        })
+    });
+
     //get user from database
     app.get('/api/user/', function (req, res) {
+        console.log(req.session);
         Users.findById(req.session.userId, function (err, user) {
             if (err) {
                 res.status(500).json(err);
@@ -65,10 +95,19 @@ module.exports = function (app) {
                 if (req.body.username != "") {
                     user.set({ username: req.body.username });
                 }
+
                 if (req.body.phone != "") {
                     user.set({ phone: req.body.phone });
                 }
-                /*if (req.files) {
+
+                if (req.files) {
+                    if (req.body.username != "") {
+                        user.set({ username: req.body.username });
+                    }
+                    if (req.body.phone != "") {
+                        user.set({ phone: req.body.phone });
+                    }
+
                     let sampleFile = req.files.sampleFile;
 
                     var fileName = new Date().getTime() + "_" + sampleFile.name;
@@ -82,19 +121,30 @@ module.exports = function (app) {
                         }
                         else {
                             console.log('set');
-                            user.set({ avatar: '/images/'+fileName });
+                            user.set({ avatar: '/images/' + fileName });
+
+                            user.save(function (err, updatedUser) {
+                                if (err) {
+                                    res.status(500).json(err);
+                                }
+                                else {
+                                    return res.redirect('/user/profile');
+                                }
+                            });
+
                         }
                     });
-                }*/
-
-                user.save(function (err, updatedUser) {
-                    if (err) {
-                        res.status(500).json(err);
-                    }
-                    else {
-                        return res.redirect('/user/profile');
-                    }
-                });
+                }
+                if (!req.files) {
+                    user.save(function (err, updatedUser) {
+                        if (err) {
+                            res.status(500).json(err);
+                        }
+                        else {
+                            return res.redirect('/user/profile');
+                        }
+                    });
+                }
             }
         })
     });
