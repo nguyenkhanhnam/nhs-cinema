@@ -10,49 +10,9 @@
     <title>Create new movie</title>
 
     <body ng-controller="movieController">
-        <div id="header">
-            <img id="logo" class="img-responsive" src="/images/favicon.png" alt="Logo of Cinema">
-            <h1 id="application-name">CINEMA APPLICATION</h1>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <a href="/">
-                                    <i class="fa fa-home fa-lg" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <form class="navbar-form navbar-left">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Search</button>
-                                </form>
-                            </li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li id="create">
-                                <a href="/movie/createMovie">
-                                    <i class="fa fa-upload" aria-hidden="true"></i> CREATE NEW MOVIE</a>
-                            </li>
-                            <li id="signin">
-                                <a href="/signin">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> SIGN IN</a>
-                            </li>
-                            <li id="signup">
-                                <a href="/signup">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> SIGN UP</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
-        </div>
+        <header>
+            <% include ./share/header.ejs %>
+        </header>
         <form ref='uploadForm' id='uploadForm' action='/api/movie/createMovie' method='post' encType="multipart/form-data">
             <div class="container-fluid">
 
@@ -61,7 +21,6 @@
                 <div class="container form-group col-lg-5 text-center">
                     <image class="img-responsive" id="cover" src="/images/cover.png"></image>
                     <input type="file" id="uploadFile" name="sampleFile" required="required">
-                    <!-- <p class="help-block">Example block-level help text here.</p> -->
                     <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
                         <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
                 </div>
@@ -101,13 +60,11 @@
             <div class="text-center">
                 <button type="submit" class="btn btn-primary my-btn">
                     <i class="fa fa-upload fa-lg"></i> Upload Movie</button>
-                <!--<button type="button" class="btn btn-primary my-btn">
-                    <i class="fa fa-sign-in fa-lg"></i> You need sign in</button>-->
             </div>
         </form>
-        <div id="footer">
-            <footer>Copyright &copy; Cinema Website 2018 </footer>
-        </div>
+        <footer>
+            <% include ./share/footer.ejs %>
+        </footer>
     </body>
 
 </html>

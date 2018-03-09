@@ -12,4 +12,11 @@ $(document).ready(function () {
     confirm_password = document.getElementById("confirm_password");
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
+
+    $('#searchBox').hide();
+    $('#create').hide();
+    $('#signin').hide();
+    $('#signup').hide();
+    $('#change').hide();
+    $('#signout').hide();
 });

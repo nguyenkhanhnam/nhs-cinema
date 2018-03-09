@@ -2,72 +2,27 @@
 <html ng-app="app.movies">
 
 <% include ./share/head.ejs %>
-
     <link rel="stylesheet" href="/stylesheets/list-movie.css">
     <script src="/javascripts/services/svMovies.js"></script>
     <script src="/javascripts/list-movie.js"></script>
-    <script>
+    <!--<script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-    </script>
+    </script>-->
     <title>Cinema</title>
 
     <body ng-controller="movieController">
         <!--<button onClick="meow()">Meow</button>-->
+        <header>
+            <% include ./share/header.ejs %>
+        </header>
         <div class="wrapper">
             <div class="container">
-                <div id="header">
-                    <img id="logo" class="img-responsive" src="/images/favicon.png" alt="Logo of Cinema">
-                    <h3 style="display:inline;" id="greeting" ng-click="viewProfile()"></h3>
-                    <h1 id="application-name">CINEMA APPLICATION</h1>
-                    <nav class="navbar navbar-default">
-                        <div class="container-fluid">
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <ul class="nav navbar-nav navbar-left">
-                                    <li>
-                                        <a href="/">
-                                            <i class="fa fa-home fa-lg" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <form class="navbar-form navbar-left">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Search" id="search">
-                                            </div>
-                                            <button type="submit" class="btn btn-default">Search</button>
-                                        </form>
-                                    </li>
-                                </ul>
-
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li id="create">
-                                        <a href="/movie/createMovie">
-                                            <i class="fa fa-upload" aria-hidden="true"></i> CREATE NEW MOVIE</a>
-                                    </li>
-                                    <li id="signin">
-                                        <a href="/signin">
-                                            <i class="fa fa-sign-in" aria-hidden="true"></i> SIGN IN</a>
-                                    </li>
-                                    <li id="signup">
-                                        <a href="/signup">
-                                            <i class="fa fa-user-plus" aria-hidden="true"></i> SIGN UP</a>
-                                    </li>
-                                    <li id="signout">
-                                        <a href="/signout">
-                                            <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> SIGN OUT</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.navbar-collapse -->
-                        </div>
-                        <!-- /.container-fluid -->
-                    </nav>
-                </div>
-                <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)" data-toggle="tooltip"
+                <!-- Tooltip: data-toggle="tooltip"
                     id="movie" title="<h3>{{movie.title}}</h3> <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
-                    data-placement="top">
+                    data-placement="top" -->
+                <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)">
                     <image class="img-responsive cover" src={{movie.cover}}>
                         <h2 class="info">
                             {{movie.title}}
@@ -75,9 +30,9 @@
                 </div>
             </div>
         </div>
-        <div id="footer">
-            <footer>Copyright &copy; Cinema Website 2018 </footer>
-        </div>
+        <footer>
+            <% include ./share/footer.ejs %>
+        </footer>
     </body>
 
 </html>

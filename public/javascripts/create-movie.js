@@ -9,7 +9,6 @@ for (var i = 1985; i <= thisYear + 1; i++) {
     years.push(i);
 }
 
-
 app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
     $scope.appName = "Movie List";
     $scope.genres = genres;
@@ -20,16 +19,22 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
     svMovies.getUser().then(function (res) {
         $scope.user = res.data;
         if ($scope.user != null) {
+            $('#searchBox').hide();
             $('#create').hide();
             $('#signin').hide();
             $('#signup').hide();
+            $('#change').hide();
+            $('#signout').hide();
         }
         else {
+            $('#searchBox').hide();
             $('#create').hide();
-            $('#signin').show();
-            $('#signup').show();
+            $('#signin').hide();
+            $('#signup').hide();
+            $('#change').hide();
+            $('#signout').hide();
         }
-        console.log(res);
+        //console.log(res);
     }, function (error) {
         //alert(error);
     });

@@ -1,13 +1,10 @@
 var app = angular.module("app.movies");
 
-
-
-app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
+app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function ($scope, svMovies/*, svUsers*/) {
     $scope.appName = "Movie List";
     svMovies.get().then(function (res) {
         $scope.movies = res.data;
-        console.log(res);
-
+        //console.log(res);
     }, function (error) {
         alert(error);
     });
@@ -17,17 +14,19 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
             $('#create').show();
-            $('#signout').show();
             $('#signin').hide();
             $('#signup').hide();
+            $('#change').hide();
+            $('#signout').hide();
         }
         else {
             $('#create').hide();
-            $('#signout').hide();
             $('#signin').show();
             $('#signup').show();
+            $('#change').hide();
+            $('#signout').hide();
         }
-        console.log(res);
+        //console.log(res);
     }, function (error) {
         //alert(error);
     });
@@ -40,20 +39,15 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         window.location.href = '/user/profile/';
     };
 
-
-    // filter
+    // For filter
     var search;
-
     $(document).ready(function () {
         search = document.getElementById("search");
         search.onchange = filterMovie;
     });
 
-
-
     function filterMovie() {
         var searchPattern = new RegExp('^' + search.value, 'i');
-
         for (var i = $scope.movies.length - 1; i >= 0; i--) {
             if (!searchPattern.test($scope.movies[i].title)) {
                 $scope.movies.splice(i, 1);
@@ -61,35 +55,13 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
             //console.log($scope.movies);
         }
     }
-
-
-
 }]);
 
-
-
-function meow() {
+/*function meow() {
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip({
             html: true
         });
     });
-}
-
-
-
-
-
-
-
-/*app.factory("svMovies", ['$http', function ($http) {
-    return {
-        get: function () {
-            return $http.get('/');
-        },
-        create: function (newMovie) {
-            return $http.post('/api/movie/createMovie', newMovie);
-        }
-    }
-}]);*/
+}*/
 

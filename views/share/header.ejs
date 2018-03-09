@@ -1,6 +1,11 @@
 <div id="header">
-    <img id="logo" class="img-responsive" src="/images/favicon.png" alt="Logo of Cinema">
-    <h1 id="application-name">CINEMA APPLICATION</h1>
+    <a href="/">
+        <img id="logo" class="img-responsive" src="/images/favicon.png" alt="Logo of Cinema">
+    </a>
+    <h3 style="display:inline;" id="greeting" ng-click="viewProfile()"></h3>
+    <a href="/">
+        <h1 id="application-name">CINEMA APPLICATION</h1>
+    </a>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -12,9 +17,9 @@
                         </a>
                     </li>
                     <li>
-                        <form class="navbar-form navbar-left">
+                        <form class="navbar-form navbar-left" id="searchBox">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" placeholder="Search" id="search">
                             </div>
                             <button type="submit" class="btn btn-default">Search</button>
                         </form>
@@ -22,17 +27,25 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <li id="create">
                         <a href="/movie/createMovie">
                             <i class="fa fa-upload" aria-hidden="true"></i> CREATE NEW MOVIE</a>
                     </li>
-                    <li>
+                    <li id="signin">
                         <a href="/signin">
                             <i class="fa fa-sign-in" aria-hidden="true"></i> SIGN IN</a>
                     </li>
-                    <li>
+                    <li id="signup">
                         <a href="/signup">
                             <i class="fa fa-user-plus" aria-hidden="true"></i> SIGN UP</a>
+                    </li>
+                    <li id="change">
+                        <a href="/user/changePassword">
+                            <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i> CHANGE PASSWORD</a>
+                    </li>
+                    <li id="signout">
+                        <a href="/signout">
+                            <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> SIGN OUT</a>
                     </li>
                 </ul>
             </div>

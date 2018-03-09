@@ -29,7 +29,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/movie/createMovie', function (req, res) {
-        console.log('creater');
+        //console.log('creater');
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
 

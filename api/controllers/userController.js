@@ -1,10 +1,11 @@
 var Users = require("../models/userModel");
 
 module.exports = function (app) {
+    //user sign up
     app.post('/api/user/signup', function (req, res) {
-        console.log(req.body.username);
-        console.log(req.body.email);
-        console.log(req.body.password);
+        //console.log(req.body.username);
+        //console.log(req.body.email);
+        //console.log(req.body.password);
         if (req.body.email && req.body.username && req.body.password /* && req.body.passwordConf */) {
             var userData = {
                 email: req.body.email,
@@ -20,7 +21,7 @@ module.exports = function (app) {
                     res.status(500).json(err);
                 } else {
                     req.session.userId = user._id;
-                    console.log(req.session);
+                    //console.log(req.session);
                     return res.redirect('/');
                 }
             });
@@ -51,7 +52,7 @@ module.exports = function (app) {
             else {
                 Users.authenticate(user.email, req.body.current_password, function (error, user) {
                     if (error || !user) {
-                        console.log(req.body.current_password)
+                        //console.log(req.body.current_password)
                         var err = new Error('Wrong email or password.');
                         err.status = 401;
                         res.status(401).json({ err: "Wrong email or password" });
@@ -73,7 +74,7 @@ module.exports = function (app) {
 
     //get user from database
     app.get('/api/user/', function (req, res) {
-        console.log(req.session);
+        //console.log(req.session);
         Users.findById(req.session.userId, function (err, user) {
             if (err) {
                 res.status(500).json(err);
@@ -86,7 +87,7 @@ module.exports = function (app) {
 
     //update user info
     app.post('/api/user/', function (req, res) {
-        console.log('update');
+        //console.log('update');
         Users.findById(req.session.userId, function (err, user) {
             if (err) {
                 res.status(500).json(err);
@@ -111,16 +112,16 @@ module.exports = function (app) {
                     let sampleFile = req.files.sampleFile;
 
                     var fileName = new Date().getTime() + "_" + sampleFile.name;
-                    console.log(fileName);
+                    //console.log(fileName);
 
                     // Use the mv() method to place the file somewhere on your server
                     sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
                         if (err) {
-                            console.log(fileName);
+                            //console.log(fileName);
                             return res.status(500).json(err);
                         }
                         else {
-                            console.log('set');
+                            //console.log('set');
                             user.set({ avatar: '/images/' + fileName });
 
                             user.save(function (err, updatedUser) {
