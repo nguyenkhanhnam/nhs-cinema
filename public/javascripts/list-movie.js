@@ -1,32 +1,23 @@
 var app = angular.module("app.movies");
 
-app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function ($scope, svMovies/*, svUsers*/) {
+app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($scope, svMovies, svUsers) {
     $scope.appName = "Movie List";
     svMovies.get().then(function (res) {
         $scope.movies = res.data;
-        //console.log(res);
+        $('#searchBox').show();
     }, function (error) {
-        alert(error);
+        //alert(error);
     });
 
-    svMovies.getUser().then(function (res) {
+    svUsers.getUser().then(function (res) {
         $scope.user = res.data;
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
             $('#create').show();
-            $('#signin').hide();
-            $('#signup').hide();
-            $('#change').hide();
-            $('#signout').hide();
-            $("#search-btn").hide();
         }
         else {
-            $('#create').hide();
             $('#signin').show();
             $('#signup').show();
-            $('#change').hide();
-            $('#signout').hide();
-            $("#search-btn").hide();
         }
         //console.log(res);
     }, function (error) {
@@ -42,7 +33,7 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
     };
 
     // For filter
-    var search;
+    /*var search;
     $(document).ready(function () {
         search = document.getElementById("search");
         $("#search").change(function(){
@@ -51,28 +42,31 @@ app.controller("movieController", ['$scope', 'svMovies', /*'svUsers',*/ function
         search.onkeyup = filterMovie;
         //search.onkeydown = filterMovie;
         //search.onchange = filterMovie;
-    });
+    });*/
+
+    $scope.$watch('search', function(newValue, oldValue) {
+        filterMovie();
+      });
 
 
     function filterMovie() {
-        if (search.value == "") {
+        if ($scope.search == "") {
             svMovies.get().then(function (res) {
                 $scope.movies = res.data;
                 //console.log(res);
             }, function (error) {
-                alert(error);
+                //alert(error);
             });
             return;
         }
         //console.log(search.value);
-        var searchPattern = new RegExp(search.value, "i");
+        var searchPattern = new RegExp($scope.search, "i");
         //var searchPattern = new RegExp('^' + search.value, 'i');
         for (var i = $scope.movies.length - 1; i >= 0; i--) {
             if ($scope.movies[i].title.search(searchPattern) == -1) {
                 $scope.movies.splice(i, 1);
             }
         }
-        $("#search-btn").click();
     }
 }]);
 

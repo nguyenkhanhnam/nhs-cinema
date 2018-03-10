@@ -7,7 +7,8 @@ var movieSchema = new Schema({
     genre: String,
     release: String,
     description: String,
-    cover: String
+    cover: String,
+    creator: String
 })
 
 var Movies = mongoose.model("Movies", movieSchema);

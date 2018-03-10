@@ -2,37 +2,36 @@
 <html ng-app="app.movies">
 
 <% include ./share/head.ejs %>
-    <link rel="stylesheet" href="/stylesheets/list-movie.css">
     <link rel="stylesheet" href="/stylesheets/create-movie.css">
     <script src="/javascripts/services/svMovies.js"></script>
-    <script src="/javascripts/create-movie.js"></script>
+    <script src="/javascripts/edit-movie.js"></script>
 
-    <title>Create new movie</title>
+    <title>Edit movie</title>
 
     <body ng-controller="movieController">
         <header>
             <% include ./share/header.ejs %>
         </header>
-        <form ref='uploadForm' id='uploadForm' action='/api/movie/createMovie' method='post' encType="multipart/form-data">
+        <form ref='uploadForm' id='uploadForm' action='/api/movie/edit' method='post' encType="multipart/form-data">
             <div class="container-fluid">
 
-                <h1 id="main" class="text-center">CREATE NEW MOVIE</h1>
+                <h1 id="main" class="text-center">Edit Movie</h1>
 
                 <div class="container form-group col-lg-5 text-center thumbnail-group">
-                    <image class="img-responsive text-center" id="cover" src="/images/cover.png"></image>
+                    <image class="img-responsive cover" id="cover" src="{{movie.cover}}"></image>
                     <input type="file" id="uploadFile" name="sampleFile" required="required">
-                        <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
-                            <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
+                    <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
+                        <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
                 </div>
 
                 <div class="container col-lg-7">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required="required" placeholder="Title">
+                        <input type="text" class="form-control" id="title" name="title" required="required" placeholder="Title" value="{{movie.title}}">
                     </div>
                     <div class="form-group">
                         <label for="genre">Genre</label>
-                        <select class="form-control" id="genre" name="genre">
+                        <select class="form-control" id="genre" name="genre" ng-model="movie.genre">
                             <option label={{genre}} value={{genre}} ng-repeat="genre in genres">{{genre}}</option>
                         </select>
                     </div>
@@ -40,9 +39,9 @@
                     <div class="form-group">
                         <label for="release">Release Date</label>
                         <div id="release" class="form-inline">
-                            <select class="form-control" id="month" name="month" ng-options="item as item for item in months" ng-model="thisMonth">
+                            <select class="form-control" id="month" name="month" ng-options="item as item for item in months" ng-model="movieMonth">
                             </select>
-                            <select class="form-control" id="year" name="year" ng-options="item as item for item in years" ng-model="thisYear">
+                            <select class="form-control" id="year" name="year" ng-options="item as item for item in years" ng-model="movieYear">
                                 <!--<option label={{year}} value={{year}} ng-repeat="year in years">{{year}}</option>-->
                             </select>
                         </div>
@@ -50,12 +49,15 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" type="textarea" class="form-control" id="description" rows="4" placeholder="Write something about the movie, actors, the content of the movie,..."
-                            required="required"></textarea>
+                        <textarea name="description" type="textarea" class="form-control" id="description" rows="5" placeholder="Write something about the movie, actors, the content of the movie,..."
+                            required="required">{{movie.description}}</textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary my-btn pull-right">
-                    <i class="fa fa-upload fa-lg"></i> Upload Movie</button>
+
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary my-btn">
+                    <i class="fa fa-floppy-o fa-lg"></i> Save</button>
             </div>
         </form>
         <footer>

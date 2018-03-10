@@ -38,7 +38,7 @@ module.exports = function (app) {
                 res.status(401).json({ err: "Wrong email or password" });
             } else {
                 req.session.userId = user._id;
-                return res.redirect('/');
+                return res.status(200).json({ success: true });
             }
         });
     });
@@ -50,27 +50,20 @@ module.exports = function (app) {
                 res.status(500).json({ err: "userId not found" });
             }
             else {
-                Users.authenticate(user.email, req.body.current_password, function (error, user) {
-                    if (error || !user) {
-                        //console.log(req.body.current_password)
-                        var err = new Error('Wrong email or password.');
-                        err.status = 401;
-                        res.status(401).json({ err: "Wrong email or password" });
-                    } else {
-                        user.set({ password: req.body.password });
-                        user.save(function (err, updatedUser) {
-                            if (err) {
-                                res.status(500).json(err);
-                            }
-                            else {
-                                return res.redirect('/user/profile');
-                            }
-                        });
+                user.set({ password: req.body.password });
+                user.save(function (err, updatedUser) {
+                    if (err) {
+                        res.status(500).json(err);
+                    }
+                    else {
+                        return res.status(200).json({ success: true });
                     }
                 });
             }
-        })
+        });
+
     });
+
 
     //get user from database
     app.get('/api/user/', function (req, res) {

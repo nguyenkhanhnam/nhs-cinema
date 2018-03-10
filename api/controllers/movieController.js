@@ -28,6 +28,9 @@ module.exports = function (app) {
         })
     });
 
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
     app.post('/api/movie/createMovie', function (req, res) {
         //console.log('creater');
         if (!req.files)
@@ -42,14 +45,23 @@ module.exports = function (app) {
         sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
             if (err) {
                 return res.status(500).send(err);
+
             }
             else {
+                var month = months.indexOf(req.body.month.split(":").pop()) + 1;
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                var year = req.body.month.split(":").pop();
+                console.log(month);
+                console.log(req.body.month);
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
-                    release: req.body.month+"-"+req.body.year,
+                    release: month + year,
                     description: req.body.description,
-                    cover: `/images/${fileName}`
+                    cover: `/images/${fileName}`,
+                    creator:  req.session.userId
                 }
 
                 Movies.create(newMovie, function (err) {
@@ -60,6 +72,26 @@ module.exports = function (app) {
                         res.redirect('/');
                     }
                 })
+            }
+        });
+    });
+
+    app.post('/api/movie/edit', function (req, res) {
+        Movies.findById(req.params.id, function (err, movie) {
+            if (err) {
+                res.status(500).json(err);
+            }
+            else {
+                movie.title = req.body.title;
+                movie.genre = req.body.genre;
+                movie.release = req.body.month + "-" + req.body.year;
+                movie.description = req.body.description;
+                //cover: `/images/${fileName}`
+
+                movie.save(function (err, updatedMovie) {
+                    if (err) return handleError(err);
+                    res.send(updatedMovie);
+                });
             }
         });
     });

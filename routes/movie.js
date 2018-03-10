@@ -51,6 +51,11 @@ router.get('/detail/:id', function (req, res, next) {
   res.render('movie-detail.ejs');
 });
 
+router.get('/edit/:id', function (req, res, next) {
+  //res.send('respond with a resource');
+  res.render('edit-movie.ejs');
+});
+
 router.get('/createMovie', function (req, res, next) {
   res.render('create-movie.ejs');
 });

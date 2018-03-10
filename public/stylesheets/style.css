@@ -26,3 +26,11 @@ html, body {
   margin-right: auto;
   width: 500px;
 }
+
+#searchBox,#create, #signin, #signout, #signup, #change, #edit {
+  display: none;
+}
+
+#search {
+  width: 300px;
+}

@@ -13,11 +13,5 @@ $(document).ready(function () {
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 
-    $('#searchBox').hide();
-    $('#create').hide();
     $('#signin').show();
-    $('#signup').hide();
-    $('#change').hide();
-    $('#signout').hide();
-
 });

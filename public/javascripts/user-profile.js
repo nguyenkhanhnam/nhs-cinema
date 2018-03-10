@@ -15,10 +15,7 @@ function uploadImage() {
 }
 
 $(document).ready(function () {
-    $('#searchBox').hide();
     $('#create').show();
-    $('#signin').hide();
-    $('#signup').hide();
     $('#change').show();
     $('#signout').show();
     $('#greeting').html("Welcome "+ $("#username").val());   

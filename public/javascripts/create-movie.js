@@ -1,43 +1,23 @@
 var app = angular.module("app.movies");
 var genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', 'Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thriller', 'War', 'Western'];
-var months = ['Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var years = [];
 var date = new Date();
 var thisYear = date.getFullYear();
 var thisMonth = date.getMonth();
-for (var i = 1985; i <= thisYear + 1; i++) {
+for (var i = 1878; i <= thisYear + 1; i++) {
     years.push(i);
 }
 
 app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
     $scope.appName = "Movie List";
+    
     $scope.genres = genres;
     $scope.months = months;
     $scope.years = years;
-    $scope.thisYear = thisYear;
-
-    svMovies.getUser().then(function (res) {
-        $scope.user = res.data;
-        if ($scope.user != null) {
-            $('#searchBox').hide();
-            $('#create').hide();
-            $('#signin').hide();
-            $('#signup').hide();
-            $('#change').hide();
-            $('#signout').hide();
-        }
-        else {
-            $('#searchBox').hide();
-            $('#create').hide();
-            $('#signin').hide();
-            $('#signup').hide();
-            $('#change').hide();
-            $('#signout').hide();
-        }
-        //console.log(res);
-    }, function (error) {
-        //alert(error);
-    });
+    
+    $scope.thisYear =  thisYear;
+    $scope.thisMonth = months[thisMonth];
 }]);
 
 function uploadImage() {
