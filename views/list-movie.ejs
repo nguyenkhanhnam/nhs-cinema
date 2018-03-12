@@ -20,8 +20,10 @@
             <div class="container">
                 <!-- Tooltip: data-toggle="tooltip"
                     id="movie" title="<h3>{{movie.title}}</h3> <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
-                    data-placement="top" -->
-                <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)">
+                    data-placement="bottom" -->
+                <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)" data-toggle="tooltip"
+                id="movie" title="<h3>{{movie.title}}</h3><h4>({{movie.release}})</h4>  <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
+                data-placement="auto right">
                     <image class="img-responsive cover" src={{movie.cover}}>
                         <h2 class="info">
                             {{movie.title}}

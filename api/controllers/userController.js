@@ -22,7 +22,7 @@ module.exports = function (app) {
                 } else {
                     req.session.userId = user._id;
                     //console.log(req.session);
-                    return res.redirect('/');
+                    //return res.redirect('/');
                 }
             });
         }

@@ -25,11 +25,21 @@
                         </form>
                         <!--</div>-->
                     </li>
+                    <li>
+                        <form class="navbar-form navbar-left" id="sortBox">
+                            <div class="form-group">
+                                <label for="sort">Sort by </label>
+                                <select class="form-control" id="sort" name="sort" ng-options="item as item for item in sorts" ng-model="sort">
+                                </select>
+                            </div>
+                        </form>
+
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li id="create">
-                        <a href="/movie/createMovie">
+                        <a href="/movie/create">
                             <i class="fa fa-upload" aria-hidden="true"></i> CREATE NEW MOVIE</a>
                     </li>
                     <li id="signin">

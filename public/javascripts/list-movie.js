@@ -2,9 +2,24 @@ var app = angular.module("app.movies");
 
 app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($scope, svMovies, svUsers) {
     $scope.appName = "Movie List";
+    $scope.sorts = ['Create date', 'Release date', 'Title', 'Genre'];
+    $scope.sort = $scope.sorts[0];
+
     svMovies.get().then(function (res) {
         $scope.movies = res.data;
         $('#searchBox').show();
+        $('#sortBox').show();
+        $scope.$watch('search', function (newValue, oldValue) {
+            filterMovie();
+        });
+        $scope.$watch('sort', function (newValue, oldValue) {
+            sortMovie();
+        });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            });
+        });
     }, function (error) {
         //alert(error);
     });
@@ -32,22 +47,33 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         window.location.href = '/user/profile/';
     };
 
-    // For filter
-    /*var search;
-    $(document).ready(function () {
-        search = document.getElementById("search");
-        $("#search").change(function(){
-            filterMovie();
-        })
-        search.onkeyup = filterMovie;
-        //search.onkeydown = filterMovie;
-        //search.onchange = filterMovie;
-    });*/
+    function sortBy(property) {
+        return function (a, b) {
+            if (a[property] > b[property]) {
+                return 1;
+            } else if (a[property] < b[property]) {
+                return -1;
+            }
+            return 0;
+        }
+    }
 
-    $scope.$watch('search', function(newValue, oldValue) {
-        filterMovie();
-      });
-
+    function sortMovie() {
+        if ($scope.sort == "Title") {
+            console.log("Title");
+            $scope.movies.sort(sortBy("title"));
+        }
+        if ($scope.sort == "Genre") {
+            $scope.movies.sort(sortBy("genre"));
+        }
+        if ($scope.sort == "Create date") {
+            console.log("Create date");
+            $scope.movies.sort(sortBy("_id")).reverse(); 
+        }
+        if ($scope.sort == "Release date") {
+            $scope.movies.sort(sortBy("release"));
+        }
+    }
 
     function filterMovie() {
         if ($scope.search == "") {
@@ -70,11 +96,11 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
     }
 }]);
 
-/*function meow() {
+function meow() {
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip({
             html: true
         });
     });
-}*/
+}
 

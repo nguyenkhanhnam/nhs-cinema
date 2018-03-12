@@ -31,7 +31,7 @@ module.exports = function (app) {
 
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    app.post('/api/movie/createMovie', function (req, res) {
+    app.post('/api/movie/create', function (req, res) {
         //console.log('creater');
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
@@ -58,7 +58,7 @@ module.exports = function (app) {
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
-                    release: month + year,
+                    release: year + "/"+ month,
                     description: req.body.description,
                     cover: `/images/${fileName}`,
                     creator:  req.session.userId

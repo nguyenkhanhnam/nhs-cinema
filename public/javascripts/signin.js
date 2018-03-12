@@ -4,22 +4,19 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
     $scope.appName = "Movie List";
     $('#signup').show();
 
-    svMovies.get().then(function (res) {
-        $scope.movies = res.data;
-        $('#searchBox').show();
-    }, function (error) {
-        //alert(error);
-    });
-
     $scope.signIn = function () {
         var signInData = {
             email: $("#email").val(),
-            password: $("#password").val(),
+            password: $("#password").val()
         };
         //console.log(signInData);
         svUsers.signIn(signInData).then(function (res) {
             //console.log(res);
-            window.location.href = '/';
+            var x = document.getElementById("snackbar");
+            $('#snackbar').html("Sign in successfully");
+            x.className = "show";
+            //setTimeout(function () { x.className = x.className.replace("show", ""); }, 0);
+            setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/'; }, 1000);
         }, function (error) {
             //alert(error);
             //console.log(error);
