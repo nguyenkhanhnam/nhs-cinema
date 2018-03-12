@@ -21,7 +21,7 @@ var app = angular.module("app.movies");
 
 app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($scope, svMovies, svUsers) {
     $scope.appName = 'Sign Up';
-    $('#signup').show();
+    $('#signin').show();
 
     $scope.signUp = function (isValid) {
         if (isValid) {

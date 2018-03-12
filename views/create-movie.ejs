@@ -21,8 +21,9 @@
                 <div class="container form-group col-lg-5 text-center thumbnail-group">
                     <image class="img-responsive text-center" id="cover" src="/images/cover.png"></image>
                     <input type="file" id="uploadFile" name="sampleFile" required="required">
-                        <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
-                            <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
+                    <button type="button" id="uploadButton" class="btn btn-primary my-btn" onClick="uploadImage()">
+                        <i class="fa fa-file-image-o fa-lg"></i> Choose thumbnail</button>
+
                 </div>
 
                 <div class="container col-lg-7">
@@ -54,7 +55,7 @@
                             required="required"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary my-btn pull-right">
+                <button type="submit" id="createButton" class="btn btn-primary my-btn pull-right">
                     <i class="fa fa-upload fa-lg"></i> Create Movie</button>
             </div>
         </form>

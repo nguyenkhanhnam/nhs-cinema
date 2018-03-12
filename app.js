@@ -10,6 +10,10 @@ var user = require('./routes/user');
 
 
 // MY REQUIRE
+//For passport, fb, google
+var passport = require('passport');
+var auth = require('./routes/auth');
+
 //For api
 var setupController = require('./api/controllers/setupController');
 var movieController = require('./api/controllers/movieController');
@@ -54,11 +58,13 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // For express-fileupload
 app.use(fileUpload());
 
-
+app.use('/auth', auth);
 //app.use('/', index);
 app.get('/', function (req, res, next) {
   res.render('list-movie.ejs');
@@ -80,11 +86,11 @@ app.get('/signup', function (req, res, next) {
 });
 
 // GET /logout
-app.get('/signout', function(req, res, next) {
+app.get('/signout', function (req, res, next) {
   if (req.session) {
     // delete session object
-    req.session.destroy(function(err) {
-      if(err) {
+    req.session.destroy(function (err) {
+      if (err) {
         return next(err);
       } else {
         return res.redirect('/');

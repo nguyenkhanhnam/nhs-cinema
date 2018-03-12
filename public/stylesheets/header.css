@@ -8,10 +8,9 @@
     color: #fff;
   }
   
-  a { 
+  .navbar a { 
     font-size: 20px;
     color: #fff !important; 
-    margin-left: 20px;
   }
   
   #header {

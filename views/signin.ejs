@@ -20,7 +20,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
                         </span>
-                        <input type="email" class="form-control" id="email" placeholder="Email address" name="email" required>
+                        <input type="email" class="form-control" id="email" placeholder="Email address" name="username" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -33,16 +33,25 @@
                     </div>
                 </div>
 
-                <div class="checkbox">
+                <!--<div class="checkbox">
                     <label>
                         <input type="checkbox"> Remember me
                     </label>
+                </div>-->
+                <div class="pull-left">
+                    <button type="button" onclick="window.location.href='/signup'" class="btn btn-primary my-btn">
+                        <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Sign up</button>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary my-btn">
+                <div class="pull-right">
+                    <button class="btn btn-primary my-btn">
                         <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Sign in</button>
                 </div>
             </form>
+            <br>
+            <br>
+            <hr />
+            <button style="background-color:#395697" class="btn btn-primary my-btn" onclick="window.location.href='/auth/facebook'">
+                <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i> Facebook</button>
         </div>
         <footer>
             <% include ./share/footer.ejs %>

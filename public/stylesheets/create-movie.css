@@ -5,7 +5,19 @@
 #cover {
   border-radius: 20px;
   opacity: 0.7;
-  margin: 20px;
+  
+  vertical-align: middle;
+  display: inline-block;
+}
+
+#uploadButton {
+  margin-top: 20px;
+}
+
+#createButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .my-btn {
@@ -16,5 +28,6 @@
 }
 
 .thumbnail-group {
-  padding-right: 50px;
+  margin-top: 20px;
+  padding-right: 50px;  
 }
