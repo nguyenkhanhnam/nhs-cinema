@@ -61,6 +61,7 @@ module.exports = function (app) {
                     release: year + "/"+ month,
                     description: req.body.description,
                     cover: `/images/${fileName}`,
+                    creator:  req.session.passport.user
                 }
 
                 Movies.create(newMovie, function (err) {
