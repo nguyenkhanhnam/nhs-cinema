@@ -52,16 +52,16 @@ module.exports = function (app) {
                 if (month < 10) {
                     month = "0" + month;
                 }
-                var year = req.body.month.split(":").pop();
+                var year = req.body.year.split(":").pop();
                 console.log(month);
                 console.log(req.body.month);
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
-                    release: year + "/"+ month,
+                    release: year + "/" + month,
                     description: req.body.description,
                     cover: `/images/${fileName}`,
-                    creator:  req.session.passport.user
+                    creator: req.session.passport.user
                 }
 
                 Movies.create(newMovie, function (err) {
@@ -77,20 +77,26 @@ module.exports = function (app) {
     });
 
     app.post('/api/movie/edit', function (req, res) {
-        Movies.findById(req.params.id, function (err, movie) {
+        console.log(req.body.id);
+        Movies.findById(req.body.id, function (err, movie) {
             if (err) {
                 res.status(500).json(err);
             }
             else {
+                var month = months.indexOf(req.body.month.split(":").pop()) + 1;
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                var year = req.body.year.split(":").pop();
                 movie.title = req.body.title;
                 movie.genre = req.body.genre;
-                movie.release = req.body.month + "-" + req.body.year;
+                movie.release = year + "/" + month;
                 movie.description = req.body.description;
                 //cover: `/images/${fileName}`
 
                 movie.save(function (err, updatedMovie) {
                     if (err) return handleError(err);
-                    res.send(updatedMovie);
+                    res.redirect('/');
                 });
             }
         });

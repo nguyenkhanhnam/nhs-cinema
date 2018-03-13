@@ -19,8 +19,8 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
     var movieId = window.location.href.split('/').pop();
     svMovies.getDetail(movieId).then(function (res) {
         $scope.movie = res.data;
-        $scope.movieYear =  parseInt($scope.movie.release.split('-').pop());
-        $scope.movieMonth = months[$scope.movie.release.split('-')[0]-1];
+        $scope.movieYear =  parseInt($scope.movie.release.split('/')[0]);
+        $scope.movieMonth = months[$scope.movie.release.split('/')[1]-1];
     
         console.log($scope.movieYear);
     }, function (error) {
@@ -46,6 +46,20 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         window.location.href = '/user/profile/';
     };
 
+    $scope.uploadImage = function() {
+        document.getElementById('uploadFile').click();
+        document.getElementById('uploadFile').addEventListener('change', function () {
+            var reader = new FileReader();
+    
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById('cover').src = e.target.result;
+            };
+    
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        })
+    }
 
 }]);
 

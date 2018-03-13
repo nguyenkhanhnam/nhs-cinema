@@ -27,6 +27,13 @@ html, body {
   width: 500px;
 }
 
+.my-btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #204d74;
+  border-color: #122b40;
+}
+
 #searchBox, #sortBox, #create, #signin, #signout, #signup, #change, #edit {
   display: none;
 }
