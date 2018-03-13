@@ -24,18 +24,23 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         //alert(error);
     });
 
+
     svUsers.getUser().then(function (res) {
+        
+        console.log("meow");
         $scope.user = res.data;
+        console.log("abc");
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
             $('#create').show();
         }
         else {
-            $('#signin').show();
-            $('#signup').show();
+           
         }
         //console.log(res);
     }, function (error) {
+        $('#signin').show();
+        $('#signup').show();
         //alert(error);
     });
 
@@ -68,7 +73,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         }
         if ($scope.sort == "Create date") {
             console.log("Create date");
-            $scope.movies.sort(sortBy("_id")).reverse(); 
+            $scope.movies.sort(sortBy("_id")).reverse();
         }
         if ($scope.sort == "Release date") {
             $scope.movies.sort(sortBy("release"));

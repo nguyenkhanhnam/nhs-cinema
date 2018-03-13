@@ -56,8 +56,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false
-}));
+  saveUninitialized: false}
+));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -143,6 +143,7 @@ mongoose.connect(connStr, function(err) {
     if (err) throw err;
     console.log('Successfully connected to MongoDB');
 });*/
+
 
 
 

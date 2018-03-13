@@ -11,7 +11,6 @@ var SALT_WORK_FACTOR = 10;
 var userSchema = new Schema({
     username: {
         type: String,
-        required: true,
         trim: true
     },
     email: {
@@ -22,7 +21,6 @@ var userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
     },
     phone: Number,
     avatar: String,

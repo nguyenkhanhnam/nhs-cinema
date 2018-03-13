@@ -20,7 +20,8 @@ module.exports = function (app) {
                 if (err) {
                     res.status(500).json(err);
                 } else {
-                    req.session.userId = user._id;
+                    //req.session.cookie.passport.user = user._id;
+                    req.session.passport = { user: user._id };
                     //console.log(req.session);
                     //return res.redirect('/');
                 }
@@ -37,7 +38,12 @@ module.exports = function (app) {
                 err.status = 401;
                 res.status(401).json({ err: "Wrong email or password" });
             } else {
-                req.session.userId = user._id;
+                //req.session.cookie.passport =  {user: user._id};
+                //console.log("Req");
+                //console.log(req.session);
+                //req.session.userId = user._id;
+                req.session.passport = { user: user._id };
+                console.log(req.session);
                 return res.status(200).json({ success: true });
             }
         });
@@ -45,7 +51,7 @@ module.exports = function (app) {
 
     //change user's password
     app.post('/api/user/changepassword', function (req, res) {
-        Users.findById(req.session.userId, function (err, user) {
+        Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
                 res.status(500).json({ err: "userId not found" });
             }
@@ -67,21 +73,25 @@ module.exports = function (app) {
 
     //get user from database
     app.get('/api/user/', function (req, res) {
+        console.log(req.session);
         //console.log(req.session);
-        Users.findById(req.session.userId, function (err, user) {
+
+        Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
-                res.status(500).json(err);
+                console.log(err);
+                res.status(401).json({ err: "Id not found" });
             }
             else {
-                res.json(user);
+                return res.json(user);
             }
         })
+
     });
 
     //update user info
     app.post('/api/user/', function (req, res) {
         //console.log('update');
-        Users.findById(req.session.userId, function (err, user) {
+        Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
                 //console.log("err by id");
                 //console.log(req.session);

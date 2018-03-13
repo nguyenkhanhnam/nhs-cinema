@@ -8,7 +8,7 @@ var Users = require('../api/models/userModel');
 });*/
 
 router.get('/', function (req, res, next) {
-  res.json({session: req.session});
+  //res.json({session: req.session});
 });
 
 router.get('/signup', function (req, res, next) {
@@ -16,11 +16,11 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.get('/changePassword', function(req, res, next){
-  res.render('change-password', {session: req.session});
+  res.render('change-password'); //, {session: req.session}
 });
 
 router.get('/profile', function (req, res, next) {
-  Users.findById(req.session.userId)
+  Users.findById(req.session.passport.user)
     .exec(function (error, user) {
       if (error) {
         return next(error);
@@ -31,6 +31,7 @@ router.get('/profile', function (req, res, next) {
           return next(err);
         } else {
           res.render('user-profile', {user: user});
+          console.log(user);
           //return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
