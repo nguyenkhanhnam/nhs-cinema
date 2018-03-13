@@ -26,16 +26,16 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
 
 
     svUsers.getUser().then(function (res) {
-        
+
         console.log("meow");
         $scope.user = res.data;
         console.log("abc");
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
+            $('#logo').attr("src", $scope.user.avatar);
+            $('#logo').css("border-radius","50%");
+            $('#logoGroup').attr("href", "/user/profile");
             $('#create').show();
-        }
-        else {
-           
         }
         //console.log(res);
     }, function (error) {
