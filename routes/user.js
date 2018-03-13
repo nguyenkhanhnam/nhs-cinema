@@ -20,6 +20,7 @@ router.get('/changePassword', function(req, res, next){
 });
 
 router.get('/profile', function (req, res, next) {
+  
   Users.findById(req.session.passport.user)
     .exec(function (error, user) {
       if (error) {
