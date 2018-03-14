@@ -13,13 +13,16 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         };
         //console.log(signInData);
         svUsers.resetPassword(resetPasswordData).then(function (res) {
-            //window.location.href = '/user/profile';
+            var x = document.getElementById("snackbar");
+            $('#snackbar').html(res.data.msg);
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/'; }, 1000);
         }, function (error) {
             //alert(error);
             //console.log(error);
             if (error) {
-                $('#signup-modal')>$('h4').html("Reset Password");
-                $('#signup-modal')>$('p').html('This email does not belong to any account')
+                $('#signup-modal') > $('h4').html("Reset Password");
+                $('#signup-modal') > $('p').html('This email does not belong to any account')
                 $('#signup-modal').modal('show');
             }
         });

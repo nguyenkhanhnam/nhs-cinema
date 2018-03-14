@@ -79,6 +79,9 @@ app.use('/user', user);
 // Create routing
 app.use('/movie', movie);
 
+app.get('/mail',function(req, res, next){
+  return res.render('email.ejs')
+})
 
 
 app.get('/signin', function (req, res, next) {
