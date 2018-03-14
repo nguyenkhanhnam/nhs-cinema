@@ -79,7 +79,7 @@ app.use('/user', user);
 // Create routing
 app.use('/movie', movie);
 
-app.get('/mail',function(req, res, next){
+app.get('/mail', function (req, res, next) {
   return res.render('email.ejs')
 })
 
@@ -102,8 +102,17 @@ app.get('/signup', function (req, res, next) {
   }
 });
 
+app.get('/forgot', function (req, res, next) {
+  res.render('forgot-password');
+});
+
 app.get('/reset', function (req, res, next) {
-  res.render('reset-password');
+  if (!req.session.passport) {
+    return res.redirect('/forgot');
+  }
+  else {
+    return res.render('reset-password.ejs');
+  }
 });
 
 // GET /logout

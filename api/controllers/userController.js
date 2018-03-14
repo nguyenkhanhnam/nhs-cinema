@@ -64,10 +64,13 @@ module.exports = function (app) {
 
     //change user's password
     app.post('/v1/users/:userId/password', function (req, res) {
+        console.log('change password');
         if (!req.session.passport) {
             return res.status(500).json({ err: "userId not found" });
         }
         Users.findById(req.session.passport.user, function (err, user) {
+            if(err)
+                return res.status(500).json({err: err});
             user.set({ password: req.body.password });
             user.save(function (err, updatedUser) {
                 if (err) {
@@ -78,9 +81,7 @@ module.exports = function (app) {
                 }
             });
         });
-
     });
-
 
     //get user from database
     app.get('/v1/users/', function (req, res) {
@@ -176,14 +177,14 @@ module.exports = function (app) {
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < 10; i++)
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
 
             return text;
         }
 
 
-        function sendEmail(user, password) {
+        function sendEmail(user, resetPasswordToken) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Yahoo',
                 auth: {
@@ -196,7 +197,7 @@ module.exports = function (app) {
                 to: user.email,
                 from: 'nguyenkhanhnam_13@yahoo.com.vn',
                 subject: 'NHS Cinema Password Reset',
-                text: `Dear ${user.username},\nThank you for contacting customer support.  Your new NHS Cinema password can be found below.\nThank you,\nCinema Customer Support\nEmail: ${user.email}  Password: ${password}`
+                text: `Hi, Nam.\nThere was a request to change your password.\nIf you did not make this request, just ignore this email. Otherwise, please click the link below.\nhttp://localhost:3000/reset/${resetPasswordToken}\nThank you.`
             };
             smtpTransport.sendMail(mailOptions, function (err, info) {
                 if (err)
@@ -206,8 +207,8 @@ module.exports = function (app) {
             });
         }
 
-        console.log('reset');
-        console.log(req.body.email);
+        //console.log('reset');
+        //console.log(req.body.email);
 
         Users.findOne({ email: req.body.email }, function (err, user) {
             if (err) {
@@ -217,14 +218,16 @@ module.exports = function (app) {
                 return res.status(404).json({ error: 'Email not found' });
             }
             else {
-                var newPassword = makeid();
-                user.password = newPassword;
+                //ref: http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/
+                var resetPasswordToken = makeid();
+                var resetPasswordExpires = Date.now() + 3600000;    //1 hour
+                user.resetPasswordToken = resetPasswordToken;
+                user.resetPasswordExpires = resetPasswordExpires;
 
                 user.save(function (err, updatedUser) {
                     if (err) return handleError(err);
-                    console.log(newPassword);
                     //res.redirect('/user/profile');
-                    sendEmail(user, newPassword);
+                    sendEmail(user, resetPasswordToken);
                     res.status(200).json({ msg: 'Password sent' });
                 });
             }
@@ -232,4 +235,15 @@ module.exports = function (app) {
 
 
     });
+
+    app.get('/reset/:token', function (req, res, next) {
+        Users.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+            if (!user) {
+                //req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.redirect('/forgot');
+            }
+            req.session.passport = { user: user._id };
+            return res.redirect('/reset');
+        });
+    })
 }

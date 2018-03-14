@@ -5,26 +5,32 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
     $('#signin').show();
     $('#signup').show();
 
-    $scope.resetPassword = function () {
+    svUsers.getUser().then(function (res) {
+        $scope.user = res.data;
+    }, function (error) {
+        console.log(error);
+    });
 
-        //alert("submittedd");
-        var resetPasswordData = {
-            email: $("#email").val()
-        };
-        //console.log(signInData);
-        svUsers.resetPassword(resetPasswordData).then(function (res) {
-            var x = document.getElementById("snackbar");
-            $('#snackbar').html(res.data.msg);
-            x.className = "show";
-            setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/'; }, 1000);
-        }, function (error) {
-            //alert(error);
-            //console.log(error);
-            if (error) {
-                $('#signup-modal') > $('h4').html("Reset Password");
-                $('#signup-modal') > $('p').html('This email does not belong to any account')
-                $('#signup-modal').modal('show');
+    $scope.changePassword = function (isValid) {
+        if (isValid) {
+            var newPassword = {
+                password: $("#password").val()
             }
-        });
+            svUsers.changePassword(newPassword, $scope.user._id).then(function (res) {
+                console.log(res);
+                var x = document.getElementById("snackbar");
+                $('#snackbar').html(res.data.msg);
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                    window.location.href = '/';
+                }, 1000);
+            }, function (error) {
+                console.log(error);
+            });
+        } else {
+            $('#password-modal').modal('show');
+            $('#password-modal') > $('h4').html($scope.appName);
+        }
     };
 }]);

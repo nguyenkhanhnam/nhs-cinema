@@ -24,7 +24,9 @@ var userSchema = new Schema({
     },
     phone: Number,
     avatar: String,
-    provider: String
+    provider: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 })
 
 //hashing a password before saving it to the database
