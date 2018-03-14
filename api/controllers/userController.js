@@ -69,9 +69,11 @@ module.exports = function (app) {
             return res.status(500).json({ err: "userId not found" });
         }
         Users.findById(req.session.passport.user, function (err, user) {
-            if(err)
-                return res.status(500).json({err: err});
+            if (err)
+                return res.status(500).json({ err: err });
             user.set({ password: req.body.password });
+            user.set({ resetPasswordToken: undefined });
+            user.set({ resetPasswordExpires: undefined });
             user.save(function (err, updatedUser) {
                 if (err) {
                     res.status(500).json(err);
