@@ -13,9 +13,13 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
             $scope.user = res.data;
             if ($scope.user != null) {
                 document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
+                $('#logo').attr("src", $scope.user.avatar);
+                $('#logo').css("border-radius","50%");
+                $('#logoGroup').attr("href", "/user/profile");
                 $('#create').show();
-                console.log($scope.movie.creator);
-                console.log($scope.user._id);
+                $('#create').show();
+                //console.log($scope.movie.creator);
+                //console.log($scope.user._id);
                 if ($scope.user._id == $scope.movie.creator) {
                     $('#edit').show();
                 }

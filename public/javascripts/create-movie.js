@@ -9,15 +9,36 @@ for (var i = 1878; i <= thisYear + 1; i++) {
     years.push(i);
 }
 
-app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
+app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($scope, svMovies, svUsers) {
+    svUsers.getUser().then(function (res) {
+        $scope.user = res.data;
+        if ($scope.user != null) {
+            document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
+            $('#create').show();
+            $('#logo').attr("src", $scope.user.avatar);
+            $('#logo').css("border-radius", "50%");
+            $('#logoGroup').attr("href", "/user/profile");
+            $('#create').show();
+        }
+        else {
+            $('#signin').show();
+            $('#signup').show();
+        }
+        //console.log(res);
+    }, function (error) {
+        //alert(error);
+    });
+
     $scope.appName = "Movie List";
-    
+
     $scope.genres = genres;
     $scope.months = months;
     $scope.years = years;
-    
-    $scope.thisYear =  thisYear;
+
+    $scope.thisYear = thisYear;
     $scope.thisMonth = months[thisMonth];
+
+
 }]);
 
 function uploadImage() {

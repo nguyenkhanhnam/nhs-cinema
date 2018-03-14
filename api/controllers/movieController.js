@@ -77,7 +77,7 @@ module.exports = function (app) {
     });
 
     app.put('/v1/movies/:id', function (req, res) {
-        console.log(req);
+        //console.log(req);
         //console.log(req.body.id);
         Movies.findById(req.body.id, function (err, movie) {
             if (err) {
@@ -97,7 +97,8 @@ module.exports = function (app) {
 
                 movie.save(function (err, updatedMovie) {
                     if (err) return handleError(err);
-                    res.redirect('/');
+                    res.status(200).json({msg: 'Movie edited'})
+                    //res.redirect('/');
                 });
             }
         });

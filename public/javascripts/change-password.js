@@ -8,6 +8,10 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         console.log("meow");
         $scope.user = res.data;
         document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
+        $('#logo').attr("src", $scope.user.avatar);
+        $('#logo').css("border-radius","50%");
+        $('#logoGroup').attr("href", "/user/profile");
+        $('#create').show();
     }, function (error) {
         //alert(error);
     });

@@ -32,6 +32,10 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
             $('#create').show();
+            $('#logo').attr("src", $scope.user.avatar);
+            $('#logo').css("border-radius","50%");
+            $('#logoGroup').attr("href", "/user/profile");
+            $('#create').show();
         }
         else {
             $('#signin').show();
@@ -63,6 +67,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
 
     $scope.editMovie = function () {
         var movieData = {
+            id: $scope.movie._id,
             title: $("#title").val(),
             genre: $('#genre').val(),
             month: $('#month').val(),
@@ -70,7 +75,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
             description: $("#description").val()
         };
 
-        svMovies.editMovie(movieData, $scope.movie._id).then(function (res) {
+        svMovies.edit(movieData, $scope.movie._id).then(function (res) {
             var x = document.getElementById("snackbar");
             $('#snackbar').html(res.data.msg);
             x.className = "show";
