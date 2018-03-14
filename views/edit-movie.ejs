@@ -3,7 +3,6 @@
 
 <% include ./share/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/create-movie.css">
-    <script src="/javascripts/services/svMovies.js"></script>
     <script src="/javascripts/edit-movie.js"></script>
 
     <title>Edit movie</title>
@@ -12,7 +11,8 @@
         <header>
             <% include ./share/header.ejs %>
         </header>
-        <form ref='uploadForm' id='uploadForm' action='/api/movie/edit' method='post' encType="multipart/form-data">
+        <!--ref='uploadForm' id='uploadForm' action='/v1/movies/edit' method='post' encType="multipart/form-data"-->
+        <form ng-submit='editMovie()'>
             <div class="container-fluid">
                 <input style="display:none;" type="text" class="form-control" id="id" name="id" placeholder="Mivie _id" value="{{movie._id}}">
                 <h1 id="main" class="text-center">Edit Movie</h1>

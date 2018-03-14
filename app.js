@@ -82,11 +82,21 @@ app.use('/movie', movie);
 
 
 app.get('/signin', function (req, res, next) {
-  res.render('signin');
+  if (!req.session.passport) {
+    return res.render('signin.ejs');
+  }
+  else {
+    return res.redirect('/user/profile')
+  }
 });
 
 app.get('/signup', function (req, res, next) {
-  res.render('signup');
+  if (!req.session.passport) {
+    return res.render('signup.ejs');
+  }
+  else {
+    return res.redirect('/user/profile')
+  }
 });
 
 app.get('/reset', function (req, res, next) {

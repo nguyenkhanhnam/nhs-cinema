@@ -4,7 +4,6 @@
 <% include ./share/head.ejs %>
 
     <link rel="stylesheet" href="/stylesheets/movie-detail.css">
-    <script src="/javascripts/services/svMovies.js"></script>
     <script src="/javascripts/movie-detail.js"></script>
     <title>Movie detail</title>
 
@@ -27,7 +26,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button style="margin-bottom:20px; margin-left:20px;" type="button" class="btn btn-primary my-btn" ng-click="editMovie(movie._id)" id="edit">
+                    <button style="margin-bottom:20px; margin-left:20px;" type="button" class="btn btn-primary my-btn" ng-click="editMovie()" id="edit">
                         <i class="fa fa-pencil-square-o fa-lg"></i> Edit</button>
                 </div>
             </div>

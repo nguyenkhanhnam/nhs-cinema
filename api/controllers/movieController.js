@@ -11,11 +11,11 @@ function getMovies(res) {
 };
 
 module.exports = function (app) {
-    app.get('/api/movie', function (req, res) {
+    app.get('/v1/movies.json', function (req, res) {
         getMovies(res);
     });
 
-    app.get('/api/movie/detail/:id', function (req, res) {
+    app.get('/v1/movies/:id', function (req, res) {
         Movies.findById(req.params.id, function (err, movie) {
             if (err) {
                 res.status(500).json(err);
@@ -31,7 +31,7 @@ module.exports = function (app) {
 
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    app.post('/api/movie/create', function (req, res) {
+    app.post('/v1/movies/', function (req, res) {
         //console.log('creater');
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
@@ -76,7 +76,8 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/api/movie/edit', function (req, res) {
+    app.put('/v1/movies/:id', function (req, res) {
+        console.log(req);
         //console.log(req.body.id);
         Movies.findById(req.body.id, function (err, movie) {
             if (err) {

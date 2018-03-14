@@ -1,6 +1,6 @@
 var app = angular.module("app.movies");
 
-app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMovies) {
+app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($scope, svMovies, svUsers) {
     $scope.appName = "Movie Detail";
 
     var movieId = window.location.href.split('/').pop();
@@ -9,7 +9,7 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         //console.log(res);
 
 
-        svMovies.getUser().then(function (res) {
+        svUsers.getUser().then(function (res) {
             $scope.user = res.data;
             if ($scope.user != null) {
                 document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
@@ -20,13 +20,11 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
                     $('#edit').show();
                 }
             }
-            else {
-                $('#signin').show();
-                $('#signup').show();
-            }
             //console.log(res);
         }, function (error) {
             //alert(error);
+            $('#signin').show();
+            $('#signup').show();
         });
 
 
@@ -39,8 +37,8 @@ app.controller("movieController", ['$scope', 'svMovies', function ($scope, svMov
         window.location.href = '/user/profile/';
     };
 
-    $scope.editMovie = function (movieId) {
-        window.location.href = '/movie/edit/' + movieId;
+    $scope.editMovie = function () {
+        window.location.href = '/movie/edit/' + $scope.movie._id;
     };
 }]);
 

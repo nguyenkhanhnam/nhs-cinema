@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app.movies">
 
 <% include ./share/head.ejs %>
 
@@ -8,12 +8,12 @@
 
     <title>User profile</title>
 
-    <body>
+    <body ng-controller="movieController">
         <header>
             <% include ./share/header.ejs %>
         </header>
         <div>
-            <form ref='uploadForm' id='uploadForm' action='/api/user/' method='post' encType="multipart/form-data">
+            <form ng-submit="updateProfile()">
                 <div class="container-fluid">
                     <h1 class="text-center row">USER PROFILE</h1>
 
@@ -24,7 +24,7 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="email" class="form-control" id="email" disabled placeholder="Email address" value=<%=user.email%>>
+                                <input type="email" class="form-control" id="email" disabled placeholder="Email address" value={{user.email}}>
                             </div>
                         </div>
                         <div class="form-group">
@@ -33,7 +33,7 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="User Name" value='<%=user.username%>'>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="User Name" value={{user.username}}>
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,16 +42,19 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-phone-square fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone number" value=<%=user.phone%>>
+                                <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone number" value={{user.phone}}>
                             </div>
                         </div>
+                        <button type="submit" class="my-btn btn btn-primary pull-right">
+                            <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save</button>
+
 
                     </div>
 
                     <div class="container form-group col-lg-5 text-center">
                         <div class="text-center">
                             <image style="object-fit:cover; border-radius: 50%; width: 200px; height: 200px; display: inline;" class="img-responsive"
-                                id="avatar" src=<%=user.avatar%>></image>
+                                id="avatar" src={{user.avatar}}></image>
                             <input style="display: none;" type="file" id="uploadFile" name="sampleFile">
                             <br>
                             <br>
@@ -60,10 +63,6 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="my-btn btn btn-primary">
-                            <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save</button>
-                    </div>
                     <br>
                 </div>
             </form>

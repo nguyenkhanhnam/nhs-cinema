@@ -11,17 +11,27 @@ router.get('/', function (req, res, next) {
   //res.json({session: req.session});
 });
 
-router.get('/signup', function (req, res, next) {
+/*router.get('/signup', function (req, res, next) {
   res.render('signup.ejs');
-});
+});*/
 
-router.get('/changePassword', function(req, res, next){
-  res.render('change-password'); //, {session: req.session}
+router.get('/changePassword', function (req, res, next) {
+  if (!req.session.passport) {
+    return res.redirect('/signin');
+  }
+  else {
+    return res.render('change-password.ejs');
+  }
 });
 
 router.get('/profile', function (req, res, next) {
-  
-  Users.findById(req.session.passport.user)
+  if (!req.session.passport) {
+    return res.redirect('/signin');
+  }
+  else {
+    return res.render('user-profile.ejs');
+  }
+  /*Users.findById(req.session.passport.user)
     .exec(function (error, user) {
       if (error) {
         return next(error);
@@ -36,6 +46,6 @@ router.get('/profile', function (req, res, next) {
           //return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
-    });
+    });*/
 });
 module.exports = router;

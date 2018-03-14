@@ -3,7 +3,7 @@ var nodemailer = require('nodemailer');
 
 module.exports = function (app) {
     //user sign up
-    app.post('/api/user/signup', function (req, res) {
+    app.post('/v1/users/', function (req, res) {
         //console.log(req.body.username);
         //console.log(req.body.email);
         //console.log(req.body.password);
@@ -42,7 +42,7 @@ module.exports = function (app) {
     });
 
     //authenticate input against database
-    app.post('/api/user/signin', function (req, res) {
+    app.post('/v1/authentication', function (req, res) {
         Users.authenticate(req.body.email, req.body.password, function (error, user) {
             if (error || !user) {
                 var err = new Error('Wrong email or password.');
@@ -61,32 +61,31 @@ module.exports = function (app) {
     });
 
     //change user's password
-    app.post('/api/user/changepassword', function (req, res) {
+    app.post('/v1/users/:userId/password', function (req, res) {
+        if (!req.session.passport) {
+            return res.status(500).json({ err: "userId not found" });
+        }
         Users.findById(req.session.passport.user, function (err, user) {
-            if (err) {
-                res.status(500).json({ err: "userId not found" });
-            }
-            else {
-                user.set({ password: req.body.password });
-                user.save(function (err, updatedUser) {
-                    if (err) {
-                        res.status(500).json(err);
-                    }
-                    else {
-                        return res.status(200).json({ success: true });
-                    }
-                });
-            }
+            user.set({ password: req.body.password });
+            user.save(function (err, updatedUser) {
+                if (err) {
+                    res.status(500).json(err);
+                }
+                else {
+                    return res.status(200).json({ msg: "Password changed" });
+                }
+            });
         });
 
     });
 
 
     //get user from database
-    app.get('/api/user/', function (req, res) {
-        console.log(req.session);
+    app.get('/v1/users/', function (req, res) {
         //console.log(req.session);
-
+        //console.log(req.session);
+        if (!req.session.passport)
+            return res.status(404).json("User not found");
         Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
                 console.log(err);
@@ -100,7 +99,7 @@ module.exports = function (app) {
     });
 
     //update user info
-    app.post('/api/user/', function (req, res) {
+    app.put('/v1/users/:userId/', function (req, res) {
         //console.log('update');
         Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
@@ -109,24 +108,26 @@ module.exports = function (app) {
                 res.status(500).json({ err });
             }
             else {
-                if (req.files.sampleFile === undefined) {
-                    if (req.body.username != "") {
-                        user.set({ username: req.body.username });
-                    }
-
-                    if (req.body.phone != "") {
-                        user.set({ phone: req.body.phone });
-                    }
-                    //console.log(req.files.sampleFile);
-                    user.save(function (err, updatedUser) {
-                        if (err) {
-                            res.status(500).json(err);
-                        }
-                        else {
-                            return res.redirect('/user/profile');
-                        }
-                    });
+                //if (req.files.sampleFile === undefined) {
+                if (req.body.username != "") {
+                    user.set({ username: req.body.username });
                 }
+
+                if (req.body.phone != "") {
+                    user.set({ phone: req.body.phone });
+                }
+                //console.log(req.files.sampleFile);
+                //console.log('inside');
+                user.save(function (err, updatedUser) {
+                    if (err) {
+                        res.status(500).json(err);
+                    }
+                    else {
+                        return res.status(200).json({ msg: "Update profile successfully" });
+                        //return res.status.redirect('/user/profile');
+                    }
+                });
+                /*}
 
                 else {
                     //console.log("have file?");
@@ -163,12 +164,12 @@ module.exports = function (app) {
 
                         }
                     });
-                }
+                }*/
             }
         })
     });
 
-    app.post('/api/user/reset', function (req, res, next) {
+    app.post('/v1/users/password/reset', function (req, res, next) {
         function RandomUnique() { //https://stackoverflow.com/a/44669548
             var charBank = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012346789";
             var random = '';

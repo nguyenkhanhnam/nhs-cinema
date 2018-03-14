@@ -9,7 +9,7 @@ var compareTo = function () {
         link: function (scope, element, attributes, ngModel) {
 
             ngModel.$validators.compareTo = function (modelValue) {
-                
+
                 return modelValue == scope.otherModelValue;
             };
 
@@ -29,16 +29,16 @@ app.directive('compareTo', compareTo);
 app.factory("svMovies", ['$http', function ($http) {
     return {
         get: function () {
-            return $http.get('/api/movie/');
+            return $http.get('/v1/movies.json');
         },
         getDetail: function (id) {
-            return $http.get(`/api/movie/detail/${id}`);
+            return $http.get(`/v1/movies/${id}`);
         },
         create: function (newMovie) {
-            return $http.post('/api/movie/createMovie', newMovie);
+            return $http.post('/v1/movies/', newMovie);
         },
-        getUser: function (id) {
-            return $http.get(`/api/user/`);
+        edit: function (updateMovieData, movieId) {
+            return $http.put('/v1/movies/' + movieId, updateMovieData);
         }
     }
 }]);

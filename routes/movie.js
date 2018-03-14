@@ -47,17 +47,25 @@ router.get('/', function (req, res, next) {
 
 router.get('/detail/:id', function (req, res, next) {
   //res.send('respond with a resource');
-
   res.render('movie-detail.ejs');
 });
 
 router.get('/edit/:id', function (req, res, next) {
-  //res.send('respond with a resource');
-  res.render('edit-movie.ejs');
+  if (!req.session.passport) {
+    return res.redirect('/signin');
+  }
+  else {
+    return res.render('edit-movie.ejs');
+  }
 });
 
 router.get('/create', function (req, res, next) {
-  res.render('create-movie.ejs');
+  if (!req.session.passport) {
+    return res.redirect('/signin');
+  }
+  else {
+    return res.render('create-movie.ejs');
+  }
 });
 
 /*router.post('/createMovie', function (req, res, next) {
