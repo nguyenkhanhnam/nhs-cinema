@@ -33,10 +33,13 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
             };
             //console.log(signInData);
             svUsers.signUp(signUpData).then(function (res) {
-                window.location.href = '/user/profile';
+                var x = document.getElementById("snackbar");
+                $('#snackbar').html(res.data.msg);
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/'; }, 1000);
             }, function (error) {
                 //alert(error);
-                //console.log(error);
+                console.log(error);
                 if (error) {
                     $('#signup-modal').modal('show');
                 }

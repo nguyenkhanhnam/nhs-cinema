@@ -53,8 +53,8 @@ module.exports = function (app) {
                     month = "0" + month;
                 }
                 var year = req.body.year.split(":").pop();
-                console.log(month);
-                console.log(req.body.month);
+                //console.log(month);
+                //console.log(req.body.month);
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
@@ -77,7 +77,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/movie/edit', function (req, res) {
-        console.log(req.body.id);
+        //console.log(req.body.id);
         Movies.findById(req.body.id, function (err, movie) {
             if (err) {
                 res.status(500).json(err);

@@ -4,14 +4,14 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var Users = require('../models/userModel');
 
 passport.serializeUser(function (user, done) {
-    console.log("User Id");
-    console.log(user.id);
+    //console.log("User Id");
+    //console.log(user.id);
     //req.session.userId = user.id;
     done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-    console.log(id);
+    //console.log(id);
     Users.findById(id, function (err, user) {
         done(err, user);
     });
@@ -24,7 +24,7 @@ passport.use(new FacebookStrategy({
     profileFields: ['displayName', 'email', 'picture.type(large)']
 },
     function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
+        //console.log(profile);
 
         Users.findOne({ email: profile.emails[0].value }, function (err, user) {
             if (err) {

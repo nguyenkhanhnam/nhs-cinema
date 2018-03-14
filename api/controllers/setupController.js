@@ -47,7 +47,8 @@ module.exports = function (app) {
             ];
 
         Movies.create(seedMovies, function (err, results) {
-            res.send(results);
+            //res.send(results);
+            res.redirect('/');
         });
 
     });

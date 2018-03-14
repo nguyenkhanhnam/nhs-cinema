@@ -26,10 +26,9 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
 
 
     svUsers.getUser().then(function (res) {
-
-        console.log("meow");
+        //console.log("meow");
         $scope.user = res.data;
-        console.log("abc");
+        //console.log("abc");
         if ($scope.user != null) {
             document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
             $('#logo').attr("src", $scope.user.avatar);
@@ -65,14 +64,14 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
 
     function sortMovie() {
         if ($scope.sort == "Title") {
-            console.log("Title");
+            //console.log("Title");
             $scope.movies.sort(sortBy("title"));
         }
         if ($scope.sort == "Genre") {
             $scope.movies.sort(sortBy("genre"));
         }
         if ($scope.sort == "Create date") {
-            console.log("Create date");
+            //console.log("Create date");
             $scope.movies.sort(sortBy("_id")).reverse();
         }
         if ($scope.sort == "Release date") {

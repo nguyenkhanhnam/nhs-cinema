@@ -10,6 +10,9 @@ var user = require('./routes/user');
 
 
 // MY REQUIRE
+// For Nodemailer (Send email)
+var nodemailer = require('nodemailer');
+
 //For passport, fb, google
 var passport = require('passport');
 var auth = require('./routes/auth');
@@ -56,7 +59,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false}
+  saveUninitialized: false
+}
 ));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -83,6 +87,10 @@ app.get('/signin', function (req, res, next) {
 
 app.get('/signup', function (req, res, next) {
   res.render('signup');
+});
+
+app.get('/reset', function (req, res, next) {
+  res.render('reset-password');
 });
 
 // GET /logout

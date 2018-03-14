@@ -32,7 +32,7 @@ router.get('/facebook/callback',
 router.get('/google',
   passportGoogle.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email']
+      'https://www.googleapis.com/auth/userinfo.email', 'https://mail.google.com/']
   }));
 
 // GET /auth/google/callback
