@@ -1,6 +1,6 @@
 var Users = require("../models/userModel");
 var nodemailer = require('nodemailer');
-var EmailTemplate = require('email-templates').EmailTemplate;
+var ejs = require('ejs');
 
 
 module.exports = function (app) {
@@ -186,7 +186,7 @@ module.exports = function (app) {
         }
 
 
-        function sendEmail(user, resetPasswordToken) {
+        function sendEmail(user) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Yahoo',
                 auth: {
@@ -195,11 +195,16 @@ module.exports = function (app) {
                 }
             });
 
+            var resetPasswordLink = 'http://localhost:3000/reset/' + user.resetPasswordToken;
+            var content = ejs.render('<div style="font-family: Montserrat, sans-serif;"> <h1> Hi, <strong><%=username%></strong>!</h1> <h3 style="color:gray;"> <b>There was a request to change your password.</b> </h3> <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p> <div style="margin: 10px auto; width: 500px"> <a href=<%=link%> style="cursor: pointer"> <button style="font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;"> <b>Change password</b> </button> </a> </div> <i>LOVE,</i> <br> <i>Cinema</i> </div>', { username: user.username, link: resetPasswordLink });
+
             var mailOptions = {
                 to: user.email,
                 from: 'nguyenkhanhnam_13@yahoo.com.vn',
                 subject: 'NHS Cinema Password Reset',
-                text: `Hi, Nam.\nThere was a request to change your password.\nIf you did not make this request, just ignore this email. Otherwise, please click the link below.\nhttp://localhost:3000/reset/${resetPasswordToken}\nThank you.`
+                //text: `Hi, Nam.\nThere was a request to change your password.\nIf you did not make this request, just ignore this email. Otherwise, please click the link below.\nhttp://localhost:3000/reset/${resetPasswordToken}\nThank you.`
+                html: content
+                // "<div style='font-family: Montserrat, sans-serif;'> <h1> Hi, <strong>Nam</strong>!</h1> <h3 style='color:gray;'> <b>There was a request to change your password.</b> </h3> <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p> <div style='margin: 0 auto; width: 500px'> <button style='font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;' onclick='window.location.href='http://localhost:3000';'><b>Change password</b></button> </div> <i>LOVE,</i><br> <i>Cinema</i> </div>"
             };
             smtpTransport.sendMail(mailOptions, function (err, info) {
                 if (err)
@@ -229,7 +234,7 @@ module.exports = function (app) {
                 user.save(function (err, updatedUser) {
                     if (err) return handleError(err);
                     //res.redirect('/user/profile');
-                    sendEmail(user, resetPasswordToken);
+                    sendEmail(user);
                     res.status(200).json({ msg: 'Password sent' });
                 });
             }
