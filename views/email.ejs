@@ -1,12 +1,19 @@
-<h1>
-    Hi,
-    <strong>Nam</strong>!</h1>
-<h3>
-    <b>There was a request to change your password.</b>
-</h3>
-<p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p>
-<div style="margin: 0 auto; width: 200px">
-    <button style="color: white; border-radius: 10px; padding: 10px 20px; background-color: #204d74; border-color: #122b40;"
-        onclick="window.location.href='http://localhost:3000';">Change password</button>
+<div style="font-family: Montserrat, sans-serif;">
+    <h1>
+        Hi,
+        <strong>{{username}}</strong>!</h1>
+    <h3 style="color:gray;">
+        <b>There was a request to change your password.</b>
+    </h3>
+    <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p>
+    <div style="margin: 10px auto; width: 500px">
+        <a href="{{link}}" style="cursor: pointer">
+            <button style="font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;">
+                <b>Change password</b>
+            </button>
+        </a>
+    </div>
+    <i>LOVE,</i>
+    <br>
+    <i>Cinema</i>
 </div>
-<p>Thank you.</p>
