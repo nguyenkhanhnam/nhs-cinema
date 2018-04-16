@@ -45,9 +45,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
                     //console.log(error);
                 });
             }, function (error) {
-                //alert(error);
-                //console.log("sign in");
-                //console.log(error);
+                console.log(error);
                 if (error.status == 401) {
                     $('#change-password-modal').modal('show');
                 }

@@ -27,23 +27,26 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
         alert(error);
     });
 
-    svUsers.getUser().then(function (res) {
-        $scope.user = res.data;
-        if ($scope.user != null) {
-            document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
-            $('#create').show();
-            $('#logo').attr("src", $scope.user.avatar);
-            $('#logo').css("border-radius","50%");
-            $('#logoGroup').attr("href", "/user/profile");
-            $('#create').show();
-        }
-        else {
-            $('#signin').show();
-            $('#signup').show();
-        }
-        //console.log(res);
-    }, function (error) {
-        //alert(error);
+    svUsers.getUserId().then(function (res) {
+        $scope.userId = res.data.id;
+        //console.log($scope.userId);
+        svUsers.getUserData($scope.userId).then(function (res) {
+            $scope.user = res.data;
+            if ($scope.user != null) {
+                document.getElementById("greeting").innerHTML = 'Welcome ' + $scope.user.username;
+                $('#logo').attr("src", $scope.user.avatar);
+                $('#logo').css("border-radius", "50%");
+                $('#logoGroup').attr("href", "/user/profile");
+                $('#create').show();
+            }
+            //console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+    }, function (err) {
+        $('#signin').show();
+        $('#signup').show();
+        console.log(err);
     });
 
     $scope.viewProfile = function () {

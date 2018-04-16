@@ -5,10 +5,16 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
     $('#signin').show();
     $('#signup').show();
 
-    svUsers.getUser().then(function (res) {
-        $scope.user = res.data;
-    }, function (error) {
-        console.log(error);
+    svUsers.getUserId().then(function (res) {
+        $scope.userId = res.data.id;
+        //console.log($scope.userId);
+        svUsers.getUserData($scope.userId).then(function (res) {
+            $scope.user = res.data;
+        }, function (err) {
+            console.log(err);
+        });
+    }, function (err) {
+        console.log(err);
     });
 
     $scope.changePassword = function (isValid) {

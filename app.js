@@ -57,9 +57,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //use sessions for tracking logins
 app.use(session({
-  secret: 'work hard',
+  secret: 'a very long long long key',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { httpOnly: false }
 }
 ));
 app.use(passport.initialize());

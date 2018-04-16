@@ -23,13 +23,10 @@ var compareTo = function () {
 
 app.directive('compareTo', compareTo);
 
-
-
-
 app.factory("svMovies", ['$http', function ($http) {
     return {
         get: function () {
-            return $http.get('/v1/movies.json');
+            return $http.get('/v1/movies');
         },
         getDetail: function (id) {
             return $http.get(`/v1/movies/${id}`);

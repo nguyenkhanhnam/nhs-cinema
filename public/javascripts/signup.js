@@ -46,12 +46,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
             });
         } else {
             $('#password-modal').modal('show');
-            $('#password-modal')>$('h4').html("Sign Up");
+            $('#password-modal') > $('h4').html("Sign Up");
         }
-
-
-        //console.log($scope.user.email);
-        //console.log($("#current_password").val());
-
     };
 }]);

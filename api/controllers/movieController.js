@@ -11,7 +11,7 @@ function getMovies(res) {
 };
 
 module.exports = function (app) {
-    app.get('/v1/movies.json', function (req, res) {
+    app.get('/v1/movies', function (req, res) {
         getMovies(res);
     });
 
@@ -93,7 +93,7 @@ module.exports = function (app) {
                 movie.genre = req.body.genre;
                 movie.release = year + "/" + month;
                 movie.description = req.body.description;
-                //cover: `/images/${fileName}`
+                // cover: `/images/${fileName}`
 
                 movie.save(function (err, updatedMovie) {
                     if (err) return handleError(err);

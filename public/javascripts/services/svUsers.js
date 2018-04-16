@@ -2,8 +2,11 @@ var app = angular.module("app.movies");
 
 app.factory("svUsers", ['$http', function ($http) {
     return {
-        getUser: function () {
+        getUserId: function () {
             return $http.get('/v1/users/');
+        },
+        getUserData: function (userId) {
+            return $http.get('/v1/users/' + userId);
         },
         signIn: function (logInData) {
             /*return $http.post('/v1/authentication/', {
