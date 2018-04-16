@@ -20,7 +20,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new FacebookStrategy({
     clientID: "1678125332230925",
     clientSecret: "9eeadeba30775424e1f8e4d13384c8ba",
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "https://nam-cinema.herokuapp.com/auth/facebook/callback",
     profileFields: ['displayName', 'email', 'picture.type(large)']
 },
     function (accessToken, refreshToken, profile, done) {

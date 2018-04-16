@@ -63,10 +63,10 @@ module.exports = function (app) {
     });
 
     //change user's password
-    app.post('/v1/users/:userId/password', function (req, res) {
+    app.post('/v1/users/:id/password', function (req, res) {
         console.log('change password');
         if (!req.session.passport) {
-            return res.status(500).json({ err: "userId not found" });
+            return res.status(401).json({ error: "You are unauthorized to make this request." });
         }
         Users.findById(req.session.passport.user, function (err, user) {
             if (err)
@@ -85,16 +85,37 @@ module.exports = function (app) {
         });
     });
 
-    //get user from database
+    // get user's json id from database    
     app.get('/v1/users/', function (req, res) {
-        //console.log(req.session);
-        //console.log(req.session);
-        if (!req.session.passport)
-            return res.status(404).json("User not found");
+        if (!req.session.passport) {
+            return res.status(401).json({ error: "You are unauthorized to make this request." });
+        }
         Users.findById(req.session.passport.user, function (err, user) {
             if (err) {
                 console.log(err);
-                return res.status(404).json({ err: "Id not found" });
+                return res.status(404).json({ error: "User doesn't exist" });
+            }
+            else {
+                return res.json({id: user._id});
+            }
+        })
+
+    });
+
+    //get user's json data from database
+    app.get('/v1/users/:id', function (req, res) {
+        console.log(req.session.passport);
+        console.log(req.params.id);
+        if (!req.session.passport) {
+            return res.status(401).json({ error: "You are unauthorized to make this request." });
+        }
+        if (req.session.passport.user != req.params.id) {
+            return res.status(401).json({ error: "You are unauthorized to make this request." });
+        }
+        Users.findById(req.session.passport.user, function (err, user) {
+            if (err) {
+                console.log(err);
+                return res.status(404).json({ error: "User doesn't exist" });
             }
             else {
                 return res.json(user);
@@ -174,6 +195,7 @@ module.exports = function (app) {
         })
     });
 
+    /* Forgot password */
     app.post('/v1/users/password/reset', function (req, res, next) {
         function makeid() {     //https://stackoverflow.com/a/1349426
             var text = "";
@@ -195,7 +217,7 @@ module.exports = function (app) {
                 }
             });
 
-            var resetPasswordLink = 'http://localhost:3000/reset/' + user.resetPasswordToken;
+            var resetPasswordLink = 'https://nam-cinema.herokuapp.com/reset/' + user.resetPasswordToken;
             var content = ejs.render('<div style="font-family: Montserrat, sans-serif;"> <h1> Hi, <strong><%=username%></strong>!</h1> <h3 style="color:gray;"> <b>There was a request to change your password.</b> </h3> <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p> <div style="margin: 10px auto; width: 500px"> <a href=<%=link%> style="cursor: pointer"> <button style="font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;"> <b>Change password</b> </button> </a> </div> <i>LOVE,</i> <br> <i>Cinema</i> </div>', { username: user.username, link: resetPasswordLink });
 
             var mailOptions = {
@@ -243,6 +265,7 @@ module.exports = function (app) {
 
     });
 
+    /* Reset password */
     app.get('/reset/:token', function (req, res, next) {
         Users.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
             if (!user) {
