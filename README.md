@@ -55,18 +55,37 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 ----
 ### 1.1 '/api/v1/movies/' [All]
 `POST` - Create movie <br>
+#### Request Params
+`title`: Movie title `<String>` (required)
+`genre`: Movie genre `<String>` (required)
+`release`: Movie release date `<String: YYYY/MM>` (required)
+`cover`: Movie cover `<FILE>` (required)
+`description`: Movie description `<String>`
 #### Request Example
 ```json
 {
-	"cover": [FILE],
-	"title": "The Godfather II",
-	"genre": "Crime",
-	"month": "December",
-  "year": "1974",
+  "cover": [FILE],
+  "title": "The Godfather II",
+  "genre": "Crime",
+  "release": "12/1974",
   "description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
 }
 ```
 #### Success Response
-{ status: `200`, message: `Movie created successfully` } <br>
+{ message: `Movie created successfully`, photoURL: `<String>` } <br>
 #### Error Response
-{ status: `code`, errorMessage: `<String>` } <br>
+{ errorMessage: `<String>` } <br>
+
+### 1.2 '/api/v1/movies/' [All]
+`GET` - Get all movies <br>
+#### Success Response
+{ movies: `<Movies Array>` } <br>
+#### Error Response
+{ errorMessage: `<String>` } <br>
+
+### 1.3 '/api/v1/movies/:id' [All]
+`GET` - Get 1 movie by _id <br>
+#### Success Response
+{ movie: `<Movies Object>` } <br>
+#### Error Response
+{ errorMessage: `<String>` } <br>

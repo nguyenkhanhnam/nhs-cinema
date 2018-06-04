@@ -1,11 +1,12 @@
 var Movies = require("../models/movieModel");
+const configs = require('../../configs')
 
 function getMovies(res) {
     Movies.find(function (err, movies) {
         if (err) {
-            res.status(500).json(err);
+            return res.status(500).json(err);
         } else {
-            res.json(movies);
+            return res.json(movies);
         }
     })
 };
@@ -13,6 +14,16 @@ function getMovies(res) {
 module.exports = function (app) {
     app.get('/v1/movies', function (req, res) {
         getMovies(res);
+    });
+
+    app.get('/api/v1/movies', function (req, res) {
+        Movies.find(function (err, movies) {
+            if (err) {
+                return res.status(500).json(err);
+            } else {
+                return res.send({movies: movies});
+            }
+        })
     });
 
     app.get('/v1/movies/:id', function (req, res) {
@@ -28,6 +39,16 @@ module.exports = function (app) {
         })
     });
 
+    app.get('/api/v1/movies/:id', function (req, res) {
+        Movies.findById(req.params.id, function (err, movie) {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            else {
+                return res.status(200).send({movie: movie});
+            }
+        })
+    });
 
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -72,8 +93,20 @@ module.exports = function (app) {
     });
 
     app.post('/api/v1/movies/', function (req, res) {
-        if (!req.files)
-            return res.status(400).send({errorMessage: 'No files were uploaded.' });
+        if (!req.files || !req.files.cover)
+            return res.status(400).send({errorMessage: 'Cover is required.' });
+
+        if (!req.body.title){
+            return res.status(400).send({errorMessage: 'Title is required.' });
+        }
+
+        if (!req.body.genre){
+            return res.status(400).send({errorMessage: 'Genre is required.' });
+        }
+
+        if (!req.body.release){
+            return res.status(400).send({errorMessage: 'Release date is required.' });
+        }
 
         let cover = req.files.cover;
 
@@ -84,16 +117,11 @@ module.exports = function (app) {
                 return res.status(500).send(err);
             }
             else {
-                var month = months.indexOf(req.body.month) + 1;
-                if (month < 10) {
-                    month = "0" + month;
-                }
-                var year = req.body.year;
                 var newMovie = {
                     title: req.body.title,
                     genre: req.body.genre,
-                    release: year + "/" + month,
-                    description: req.body.description,
+                    release: req.body.release,
+                    description: req.body.description || '',
                     cover: `/images/${fileName}`,
                     creator: req.session.passport? req.session.passport.user : ''
                 }
@@ -102,7 +130,8 @@ module.exports = function (app) {
                         return res.status(500).json(err);
                     }
                     else {
-                        return res.status(200).send({message: 'Movie created successfully'})
+                        const photoURL = configs.domainName + '/images/' + fileName
+                        return res.status(200).send({ message: 'Movie created successfully', photoURL: photoURL })
                     }
                 })
             }
