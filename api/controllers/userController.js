@@ -134,7 +134,7 @@ module.exports = function (app) {
                 res.status(500).json({ err });
             }
             else {
-                //if (req.files.sampleFile === undefined) {
+                //if (req.files.avatar === undefined) {
                 if (req.body.username != "") {
                     user.set({ username: req.body.username });
                 }
@@ -142,7 +142,7 @@ module.exports = function (app) {
                 if (req.body.phone != "") {
                     user.set({ phone: req.body.phone });
                 }
-                //console.log(req.files.sampleFile);
+                //console.log(req.files.avatar);
                 //console.log('inside');
                 user.save(function (err, updatedUser) {
                     if (err) {
@@ -164,13 +164,13 @@ module.exports = function (app) {
                         user.set({ phone: req.body.phone });
                     }
 
-                    let sampleFile = req.files.sampleFile;
+                    let avatar = req.files.avatar;
 
-                    var fileName = new Date().getTime() + "_" + sampleFile.name;
+                    var fileName = new Date().getTime() + "_" + avatar.name;
                     //console.log(fileName);
 
                     // Use the mv() method to place the file somewhere on your server
-                    sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
+                    avatar.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
                         if (err) {
                             //console.log(fileName);
                             return res.status(500).json(err);

@@ -73,11 +73,11 @@ router.get('/create', function (req, res, next) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.sampleFile;
+  // The name of the input field (i.e. "cover") is used to retrieve the uploaded file
+  let cover = req.files.cover;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(`D:\\nhs\\nhs-cinema\\public\\images\\${sampleFile.name}`, function (err) {
+  cover.mv(`D:\\nhs\\nhs-cinema\\public\\images\\${cover.name}`, function (err) {
     if (err)
       return res.status(500).send(err);
   });
@@ -87,7 +87,7 @@ router.get('/create', function (req, res, next) {
     genre: req.body.genre,
     release: req.body.release,
     description: req.body.description,
-    cover: `/images/${sampleFile.name}`
+    cover: `/images/${cover.name}`
   }
 
   movieList.push(newMovie);
@@ -99,10 +99,10 @@ router.get('/create', function (req, res, next) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  let sampleFile = req.files.sampleFile;
+  let cover = req.files.cover;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(__dirname + `/public/images/${sampleFile.name}`, function (err) {
+  cover.mv(__dirname + `/public/images/${cover.name}`, function (err) {
     if (err)
       return res.status(500).send(err);
 
@@ -125,11 +125,11 @@ router.get('/create', function (req, res, next) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.sampleFile;
+  // The name of the input field (i.e. "cover") is used to retrieve the uploaded file
+  let cover = req.files.cover;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(__dirname+`/public/images/${sampleFile.name}`, function (err) {
+  cover.mv(__dirname+`/public/images/${cover.name}`, function (err) {
     if (err)
       return res.status(500).send(err);
 

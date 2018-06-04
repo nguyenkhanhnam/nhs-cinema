@@ -58,7 +58,7 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 #### Request Example
 ```json
 {
-	"sampleFile": [FILE],
+	"cover": [FILE],
 	"title": "The Godfather II",
 	"genre": "Crime",
 	"month": "December",

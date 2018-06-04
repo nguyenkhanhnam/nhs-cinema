@@ -35,13 +35,11 @@ module.exports = function (app) {
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
 
-        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-        let sampleFile = req.files.sampleFile;
+        let cover = req.files.cover;
 
-        var fileName = new Date().getTime() + "_" + sampleFile.name;
+        var fileName = new Date().getTime() + "_" + cover.name;
 
-        // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
+        cover.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
             if (err) {
                 return res.status(500).send(err);
 
@@ -75,14 +73,12 @@ module.exports = function (app) {
 
     app.post('/api/v1/movies/', function (req, res) {
         if (!req.files)
-            return res.status(400).send({ errorMessage: 'No files were uploaded.' });
+            return res.status(400).send({errorMessage: 'No files were uploaded.' });
 
-        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
         let cover = req.files.cover;
 
         var fileName = new Date().getTime() + "_" + cover.name;
 
-        // Use the mv() method to place the file somewhere on your server
         cover.mv(__dirname + `/../../public/images/${fileName}`, function (err) {
             if (err) {
                 return res.status(500).send(err);
