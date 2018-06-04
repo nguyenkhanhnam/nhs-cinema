@@ -35,7 +35,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers',
             //console.log(signInData);
             svUsers.updateProfile(userProfileData, $scope.user._id).then(function (res) {
                 var x = document.getElementById("snackbar");
-                $('#snackbar').html(res.data.msg);
+                $('#snackbar').html(res.data.message);
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/user/profile'; }, 1000);
             }, function (error) {

@@ -34,7 +34,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
             //console.log(signInData);
             svUsers.signUp(signUpData).then(function (res) {
                 var x = document.getElementById("snackbar");
-                $('#snackbar').html(res.data.msg);
+                $('#snackbar').html(res.data.message);
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); window.location.href = '/'; }, 1000);
             }, function (error) {

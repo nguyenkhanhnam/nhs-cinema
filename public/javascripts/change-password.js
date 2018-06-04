@@ -35,7 +35,7 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
                 svUsers.changePassword(newPassword, $scope.user._id).then(function (res) {
                     console.log(res);
                     var x = document.getElementById("snackbar");
-                    $('#snackbar').html(res.data.msg);
+                    $('#snackbar').html(res.data.message);
                     x.className = "show";
                     setTimeout(function () { 
                         x.className = x.className.replace("show", ""); 

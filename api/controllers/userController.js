@@ -31,7 +31,7 @@ module.exports = function (app) {
                             //req.session.cookie.passport.user = user._id;
                             req.session.passport = { user: user._id };
                             //console.log(req.session);
-                            return res.status(200).json({ msg: 'Sign up successfully' })
+                            return res.status(200).json({ message: 'Sign up successfully' })
                             //return res.redirect('/');
                         }
                     });
@@ -79,7 +79,7 @@ module.exports = function (app) {
                     res.status(500).json(err);
                 }
                 else {
-                    return res.status(200).json({ msg: "Password changed" });
+                    return res.status(200).json({ message: "Password changed" });
                 }
             });
         });
@@ -149,7 +149,7 @@ module.exports = function (app) {
                         res.status(500).json(err);
                     }
                     else {
-                        return res.status(200).json({ msg: "Update profile successfully" });
+                        return res.status(200).json({ message: "Update profile successfully" });
                         //return res.status.redirect('/user/profile');
                     }
                 });
@@ -257,7 +257,7 @@ module.exports = function (app) {
                     if (err) return handleError(err);
                     //res.redirect('/user/profile');
                     sendEmail(user);
-                    res.status(200).json({ msg: 'Password sent' });
+                    res.status(200).json({ message: 'Password sent' });
                 });
             }
         });
