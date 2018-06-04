@@ -50,40 +50,23 @@ You will also see any lint errors in the console.
 ### Heroku 
 To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Heroku](https://devcenter.heroku.com/articles/deploying-nodejs).
 
-## API
-**Show User**
+## API DOCUMENTATION
+**1. API MOVIES**
 ----
-  Returns json data about a single user.
-
-* **URL**
-
-  /v1/users/:id
-
-* **Method:**
-
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
- 
-   `id=[string]`
-
-* **Data Params**
-
-  None
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{ id : 12, name : "Michael Bloom" }`
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
+### 1.1 '/api/v1/movies/' [All]
+`POST` - Create movie <br>
+#### Request Example
+```json
+{
+	"sampleFile": [FILE],
+	"title": "The Godfather II",
+	"genre": "Crime",
+	"month": "December",
+  "year": "1974",
+  "description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
+}
+```
+#### Success Response
+{ status: `200`, message: `Movie created successfully` } <br>
+#### Error Response
+{ status: `code`, errorMessage: `<String>` } <br>

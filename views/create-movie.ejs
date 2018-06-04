@@ -40,10 +40,11 @@
                     <div class="form-group">
                         <label for="release">Release Date</label>
                         <div id="release" class="form-inline">
-                            <select class="form-control" id="month" name="month" ng-options="item as item for item in months" ng-model="thisMonth">
+                            <select class="form-control" id="month" name="month" ng-model="thisMonth">
+                                <option value="{{ month }}" ng-repeat="month in months">{{ month }}</option>
                             </select>
-                            <select class="form-control" id="year" name="year" ng-options="item as item for item in years" ng-model="thisYear">
-                                <!--<option label={{year}} value={{year}} ng-repeat="year in years">{{year}}</option>-->
+                            <select class="form-control" id="year" name="year" ng-model="thisYear">
+                                <option value="{{ year }}" ng-repeat="year in years">{{ year }}</option>
                             </select>
                         </div>
                     </div>

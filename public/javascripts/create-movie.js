@@ -38,10 +38,8 @@ app.controller("movieController", ['$scope', 'svMovies', 'svUsers', function ($s
     $scope.months = months;
     $scope.years = years;
 
-    $scope.thisYear = thisYear;
+    $scope.thisYear = thisYear.toString();
     $scope.thisMonth = months[thisMonth];
-
-
 }]);
 
 function uploadImage() {
