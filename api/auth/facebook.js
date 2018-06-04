@@ -1,5 +1,6 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var configs = require('../../configs')
 
 var Users = require('../models/userModel');
 
@@ -20,7 +21,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new FacebookStrategy({
     clientID: "1678125332230925",
     clientSecret: "9eeadeba30775424e1f8e4d13384c8ba",
-    callbackURL: "https://nam-cinema.herokuapp.com/auth/facebook/callback",
+    callbackURL: configs.domainName + "/auth/facebook/callback",
     profileFields: ['displayName', 'email', 'picture.type(large)']
 },
     function (accessToken, refreshToken, profile, done) {
