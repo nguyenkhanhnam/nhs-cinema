@@ -142,3 +142,12 @@ Mobile, after logged in successfully, must store `token` into `headers['x-access
 Mobile, after logged in successfully, must store `token` into `headers['x-access-token']` of following requests.
 #### Error Response
 { status: `<Number>`, errorMessage: `<String>` } <br>
+
+**3. API USERS**
+----
+### 3.1 '/api/v1/users/' [All]
+`GET` - Get current logged in user's info <br>
+#### Success Response
+{ status: `200`, user: `<User Object>` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>
