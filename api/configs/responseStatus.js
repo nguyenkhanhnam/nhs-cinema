@@ -101,8 +101,9 @@ module.exports = {
   UPDATE_INFO_USER_SUCCESS: 'Update information successfully',
   AUTHENTICATE_FAIL: 'Failed to authenticate',
 
-  EVENT_NOT_FOUND: 'Event not found',
-  REMOVE_EVENT_SUCCESS: 'Remove event successfully',
-  CREATE_EVENT_SUCCESS: 'Create event successfully',
-  EDIT_EVENT_SUCCESS: 'Edit event successfully'
+  MOVIE_NOT_FOUND: 'Movie not found',
+  MOVIE_LIST_NOT_FOUND: 'Movie list not found',
+  REMOVE_MOVIE_SUCCESS: 'Remove movie successfully',
+  CREATE_MOVIE_SUCCESS: 'Create movie successfully',
+  EDIT_MOVIE_SUCCESS: 'Edit movie successfully'
 }
