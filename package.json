@@ -12,17 +12,29 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "email-templates": "^2.7.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
     "express": "~4.15.5",
     "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",
     "find-or-create": "^1.1.0",
+    "jsonwebtoken": "^8.2.2",
     "mongoose": "^5.0.7",
     "morgan": "~1.9.0",
     "nodemailer": "^2.7.2",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
     "passport-google-oauth": "^1.0.0",
     "serve-favicon": "~2.4.5",
     "xoauth2": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }

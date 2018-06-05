@@ -1,23 +1,41 @@
 var express = require('express')
 var router = express.Router()
-var passportFacebook = require('../api/auth/facebook')
-var passportGoogle = require('../api/auth/google')
+var passportFacebook = require('../auth/facebook')
+var passportGoogle = require('../auth/google')
+var configs = require('../../configs')
+var userController = require('../controllers/userController2')
+var jwt = require('jsonwebtoken')
 
-// Redirect the user to Facebook for authentication.  When complete,
-// Facebook will redirect the user back to the application at
-//     /auth/facebook/callback
 router.get('/facebook', passportFacebook.authenticate('facebook', { scope: 'email' }))
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
 router.get('/facebook/callback',
   passportFacebook.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/signin'
   })
 )
+
+router.post('/facebook/token', passportFacebook.authenticate('facebook-token'), function (req, res) {
+  console.log(req.user)
+  if (req.user) {
+    let token = jwt.sign({ email: req.user.email }, configs.secret, {
+      expiresIn: configs.tokenExpire
+    })
+    req.session.token = token
+    userController.getUser(req.user.id)
+      .then(resolve => {
+        const user = resolve.user
+        // userController.saveMobileToken(req, resolve.user, function (err, user) {
+        res.send({ user: user, token: token })
+        // })
+      })
+      .catch(reject => {
+        res.send({ user: req.user, token: token })
+      })
+  } else {
+    res.send({ errorMessage: 'Failed to authenticate' })
+  }
+})
 
 // GET /auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
