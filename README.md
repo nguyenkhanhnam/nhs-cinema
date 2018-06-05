@@ -126,6 +126,7 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 ```
 #### Success Response
 { status: `200`, message: `Sign in successfully`, user: `<User Object>`, token: `<String>` } <br>
+Mobile, after logged in successfully, must store `token` into `headers['x-access-token']` of following requests.
 #### Error Response
 { status: `<Number>`, errorMessage: `<String>` } <br>
 
@@ -133,3 +134,11 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 `GET` - Sign out <br>
 #### Success Response
 { status: `200`, message: `Sign out successfully` } <br>
+
+### 2.4 '/api/v1/auth/facebook/token' [Mobile]
+`POST` - Sign in with Facebook <br>
+#### Success Response
+{ status: `200`, message: `Sign in successfully`, user: `<User Object>`, token: `<String>` } <br>
+Mobile, after logged in successfully, must store `token` into `headers['x-access-token']` of following requests.
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>

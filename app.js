@@ -18,6 +18,7 @@ var setupController = require('./api/controllers/setupController')
 var movieController = require('./api/controllers/movieController')
 var userController = require('./api/controllers/userController')
 var apiAuth = require('./api/routes/auth')
+var apiUsers = require('./api/routes/user')
 
 // For routing
 var movie = require('./routes/movie')
@@ -68,6 +69,7 @@ app.use(passport.session())
 app.use(fileUpload())
 
 app.use('/api/v1/auth', apiAuth)
+app.use('/api/v1/users', apiUsers)
 
 app.use('/auth', auth)
 app.get('/', function (req, res, next) {

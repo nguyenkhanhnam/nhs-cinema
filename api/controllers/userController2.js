@@ -1,4 +1,5 @@
 var Users = require('../models/userModel')
+var responseStatus = require('../configs/responseStatus')
 
 function getUser (id) {
   return new Promise((resolve, reject) => {
@@ -8,7 +9,7 @@ function getUser (id) {
         return reject(err)
       }
       if (!user) {
-        return reject({ message: 'User not found' })
+        return reject(responseStatus.Code404({ errorMessage: responseStatus.USER_NOT_FOUND }))
       }
       return resolve(user)
     })

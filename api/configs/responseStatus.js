@@ -99,6 +99,7 @@ module.exports = {
   SIGN_OUT_SUCCESS: 'Sign out successfully',
   SIGN_UP_SUCCESS: 'Sign up successfully',
   UPDATE_INFO_USER_SUCCESS: 'Update information successfully',
+  AUTHENTICATE_FAIL: 'Failed to authenticate',
 
   EVENT_NOT_FOUND: 'Event not found',
   REMOVE_EVENT_SUCCESS: 'Remove event successfully',
