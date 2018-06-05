@@ -4,7 +4,45 @@ var passportFacebook = require('../auth/facebook')
 var passportGoogle = require('../auth/google')
 var configs = require('../../configs')
 var userController = require('../controllers/userController2')
+var authController = require('../controllers/authController')
 var jwt = require('jsonwebtoken')
+var responseStatus = require('../configs/responseStatus')
+
+router.post('/sign-up', function (req, res) {
+  const email = req.body.email
+  const username = req.body.username
+  const password = req.body.password
+  authController.signUp(email, username, password)
+    .then(resolve => {
+      return res.send(resolve)
+    })
+    .catch(reject => {
+      return res.status(reject.status).send(reject)
+    })
+})
+
+router.post('/sign-in', function (req, res) {
+  const email = req.body.email
+  const password = req.body.password
+  authController.signIn(email, password)
+    .then(resolve => {
+      return res.send(resolve)
+    })
+    .catch(reject => {
+      return res.status(reject.status).send(reject)
+    })
+})
+
+router.get('/sign-out', function (req, res) {
+  if (req.session) {
+    req.session.destroy(function (err) {
+      if (err) {
+        console.log(err)
+      }
+      return res.send({ message: responseStatus.SIGN_OUT_SUCCESS })
+    })
+  }
+})
 
 router.get('/facebook', passportFacebook.authenticate('facebook', { scope: 'email' }))
 

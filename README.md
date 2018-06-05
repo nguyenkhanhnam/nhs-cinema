@@ -89,3 +89,47 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 { movie: `<Movies Object>` } <br>
 #### Error Response
 { errorMessage: `<String>` } <br>
+
+**2. API AUTH**
+----
+### 2.1 '/api/v1/auth/sign-up' [All]
+`POST` - Sign up an account <br>
+#### Request Params
+`email`: Email `<String>` (required)
+`username`: User's name `<String>` (required)
+`password`: Password `<String>` (required)
+#### Request Example
+```json
+{
+  "email": "test1@cinema.com",
+  "username": "Test Cinema",
+  "password": "maenic"
+}
+```
+#### Success Response
+{ status: `200`, message: `Sign up successfully`, user: `<User Object>`, token: `<String>` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>
+
+### 2.2 '/api/v1/auth/sign-in' [All]
+`POST` - Sign in <br>
+#### Request Params
+`email`: Email `<String>` (required)
+`password`: Password `<String>` (required)
+#### Request Example
+```json
+{
+  "email": "test1@cinema.com",
+  "username": "Test Cinema",
+  "password": "maenic"
+}
+```
+#### Success Response
+{ status: `200`, message: `Sign in successfully`, user: `<User Object>`, token: `<String>` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>
+
+### 2.3 '/api/v1/auth/sign-out' [All]
+`GET` - Sign out <br>
+#### Success Response
+{ status: `200`, message: `Sign out successfully` } <br>
