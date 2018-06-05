@@ -130,7 +130,7 @@ module.exports = function (app) {
                         return res.status(500).json(err);
                     }
                     else {
-                        const photoURL = configs.domainName + '/images/' + fileName
+                        const photoURL = '/images/' + fileName
                         return res.status(200).send({ message: 'Movie created successfully', photoURL: photoURL })
                     }
                 })

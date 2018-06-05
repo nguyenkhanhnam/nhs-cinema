@@ -1,7 +1,7 @@
 var Users = require("../models/userModel");
 var nodemailer = require('nodemailer');
 var ejs = require('ejs');
-
+var configs = require('../../configs')
 
 module.exports = function (app) {
     //user sign up
@@ -217,7 +217,7 @@ module.exports = function (app) {
                 }
             });
 
-            var resetPasswordLink = 'https://nam-cinema.herokuapp.com/reset/' + user.resetPasswordToken;
+            var resetPasswordLink = configs.domainName + '/reset/' + user.resetPasswordToken;
             var content = ejs.render('<div style="font-family: Montserrat, sans-serif;"> <h1> Hi, <strong><%=username%></strong>!</h1> <h3 style="color:gray;"> <b>There was a request to change your password.</b> </h3> <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p> <div style="margin: 10px auto; width: 500px"> <a href=<%=link%> style="cursor: pointer"> <button style="font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;"> <b>Change password</b> </button> </a> </div> <i>LOVE,</i> <br> <i>Cinema</i> </div>', { username: user.username, link: resetPasswordLink });
 
             var mailOptions = {
