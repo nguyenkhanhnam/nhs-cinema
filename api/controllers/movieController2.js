@@ -56,13 +56,32 @@ function editMovie (req, movie) {
     movie.release = req.body.release || movie.release
     movie.description = req.body.description || movie.description
 
-    movie.save(function (err, movie) {
-      if (err) {
-        console.log(err)
-        return reject(responseStatus.Code500(err))
-      }
-      return resolve(responseStatus.Code200({ message: responseStatus.EDIT_MOVIE_SUCCESS }))
-    })
+    if (!req.files || !req.files.cover) {
+      saveEditMovie(movie)
+        .then(resolve1 => {
+          return resolve(resolve1)
+        }).catch(reject1 => {
+          return reject(reject1)
+        })
+    } else {
+      let cover = req.files.cover
+      var fileName = new Date().getTime() + '_' + cover.name
+      const pathFile = path.join(__dirname, '/../../public/images/', fileName)
+      cover.mv(pathFile, function (err) {
+        if (err) {
+          console.log(err)
+          return reject(responseStatus.Code500(err))
+        } else {
+          movie.cover = '/images/' + fileName
+          saveEditMovie(movie)
+            .then(resolve1 => {
+              return resolve(resolve1)
+            }).catch(reject1 => {
+              return reject(reject1)
+            })
+        }
+      })
+    }
   })
 }
 
@@ -90,6 +109,18 @@ function getMovies () {
         return reject(responseStatus.Code404({ errorMessage: responseStatus.MOVIE_LIST_NOT_FOUND }))
       }
       return resolve(responseStatus.Code200({ movies: movies }))
+    })
+  })
+}
+
+function saveEditMovie (movie) {
+  return new Promise((resolve, reject) => {
+    movie.save(function (err, movie) {
+      if (err) {
+        console.log(err)
+        return reject(responseStatus.Code500(err))
+      }
+      return resolve(responseStatus.Code200({ message: responseStatus.EDIT_MOVIE_SUCCESS }))
     })
   })
 }

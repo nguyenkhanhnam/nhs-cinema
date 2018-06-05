@@ -18,6 +18,7 @@ var setupController = require('./api/controllers/setupController')
 var movieController = require('./api/controllers/movieController')
 var userController = require('./api/controllers/userController')
 var apiAuth = require('./api/routes/auth')
+var apiMovies = require('./api/routes/movies')
 var apiUsers = require('./api/routes/user')
 
 // For routing
@@ -59,9 +60,8 @@ app.use(session({
   secret: 'a very long long long key',
   resave: true,
   saveUninitialized: false,
-  cookie: { httpOnly: false }
-}
-))
+  cookie: { httpOnly: true }
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -69,6 +69,7 @@ app.use(passport.session())
 app.use(fileUpload())
 
 app.use('/api/v1/auth', apiAuth)
+app.use('/api/v2/movies', apiMovies)
 app.use('/api/v1/users', apiUsers)
 
 app.use('/auth', auth)
