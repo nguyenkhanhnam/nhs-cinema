@@ -90,6 +90,36 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 #### Error Response
 { errorMessage: `<String>` } <br>
 
+### 1.4 '/api/v1/movies/:id' [All]
+`PUT` - Create movie <br>
+#### Request Params
+`title`: Movie title `<String>`
+`genre`: Movie genre `<String>`
+`release`: Movie release date `<String: YYYY/MM>`
+`cover`: Movie cover `<FILE>`
+`description`: Movie description `<String>`
+#### Request Example
+```json
+{
+  "cover": [FILE],
+  "title": "The Godfather II",
+  "genre": "Crime",
+  "release": "12/1974",
+  "description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
+}
+```
+#### Success Response
+{ message: `Movie edited successfully`, photoURL: `<String>` } <br>
+#### Error Response
+{ errorMessage: `<String>` } <br
+
+### 1.5 '/api/v1/movies/:id' [All]
+`GET` - Get 1 movie by _id <br>
+#### Success Response
+{ movie: `<Movies Object>` } <br>
+#### Error Response
+{ errorMessage: `<String>` } <br>
+
 **2. API AUTH**
 ----
 ### 2.1 '/api/v1/auth/sign-up' [All]

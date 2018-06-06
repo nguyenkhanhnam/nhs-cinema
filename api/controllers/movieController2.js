@@ -43,7 +43,7 @@ function deleteMovie (id) {
       if (err) {
         return reject(responseStatus.Code500(err))
       } else {
-        return resolve(responseStatus.Code200())
+        return resolve(responseStatus.Code200({ message: responseStatus.DELETE_MOVIE_SUCCESS }))
       }
     })
   })
@@ -120,7 +120,7 @@ function saveEditMovie (movie) {
         console.log(err)
         return reject(responseStatus.Code500(err))
       }
-      return resolve(responseStatus.Code200({ message: responseStatus.EDIT_MOVIE_SUCCESS }))
+      return resolve(responseStatus.Code200({ message: responseStatus.EDIT_MOVIE_SUCCESS, photoURL: movie.cover }))
     })
   })
 }
