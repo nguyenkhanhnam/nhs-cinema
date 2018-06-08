@@ -109,16 +109,16 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 }
 ```
 #### Success Response
-{ message: `Movie edited successfully`, photoURL: `<String>` } <br>
+{ status: `200`, message: `Movie edited successfully`, photoURL: `<String>` } <br>
 #### Error Response
-{ errorMessage: `<String>` } <br
+{ status: `<Number>`, errorMessage: `<String>` } <br
 
 ### 1.5 '/api/v1/movies/:id' [All]
-`GET` - Get 1 movie by _id <br>
+`DELETE` - Delete 1 movie by _id <br>
 #### Success Response
-{ movie: `<Movies Object>` } <br>
+{ status: `200`, message: `Delete movie successfully` } <br>
 #### Error Response
-{ errorMessage: `<String>` } <br>
+{ status: `<Number>`, errorMessage: `<String>` } <br>
 
 **2. API AUTH**
 ----
