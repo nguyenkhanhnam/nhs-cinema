@@ -15,7 +15,7 @@ var auth = require('./routes/auth')
 
 // For api
 var setupController = require('./api/controllers/setupController')
-// var movieController = require('./api/controllers/movieController')
+var movieController = require('./api/controllers/movieController')
 var userController = require('./api/controllers/userController')
 var apiAuth = require('./api/routes/auth')
 var apiMovies = require('./api/routes/movies')
@@ -128,7 +128,7 @@ app.get('/signout', function (req, res, next) {
 })
 
 setupController(app)
-// movieController(app)
+movieController(app)
 userController(app)
 
 // catch 404 and forward to error handler
