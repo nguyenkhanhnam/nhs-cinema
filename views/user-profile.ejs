@@ -54,7 +54,7 @@
                     <div class="container form-group col-lg-5 text-center">
                         <div class="text-center">
                             <image style="object-fit:cover; border-radius: 50%; width: 200px; height: 200px; display: inline;" class="img-responsive"
-                                id="avatar" src={{user.avatar}}></image>
+                                id="avatar" ng-src={{user.avatar}} onerror="this.src = '/images/avatar-user.png'"></image>
                             <input style="display: none;" type="file" id="uploadFile" name="avatar">
                             <br>
                             <br>

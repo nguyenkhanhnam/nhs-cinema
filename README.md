@@ -181,3 +181,22 @@ Mobile, after logged in successfully, must store `token` into `headers['x-access
 { status: `200`, user: `<User Object>` } <br>
 #### Error Response
 { status: `<Number>`, errorMessage: `<String>` } <br>
+
+### 3.2 '/api/v1/users/' [All]
+`PUT` - Edit current logged in user's profile <br>
+#### Request Params
+`username`: User name `<String>`
+`phone`: User phone number `<String>`
+`avatar`: User avatar `<FILE>`
+#### Request Example
+```json
+{
+  "avatar": [FILE],
+  "username": "Test Cinema",
+  "phone": "09xxxxxxx"
+}
+```
+#### Success Response
+{ status: `200`, message: `Edit profile successfully` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br

@@ -1,6 +1,6 @@
 <div id="header">
     <a id="logoGroup" href="/">
-        <img id="logo" class="img-responsive" src="/images/favicon.png" alt="Logo of Cinema">
+        <img id="logo" class="img-responsive" src="/images/favicon.png" onerror="this.src = '/images/avatar-user.png'" alt="Logo of Cinema">
     </a>
     <h3 style="display:inline;" id="greeting" ng-click="viewProfile()"></h3>
     <a href="/">
@@ -8,7 +8,6 @@
     </a>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
@@ -17,13 +16,11 @@
                         </a>
                     </li>
                     <li>
-                        <!--<div class="navbar-form navbar-left" id="searchBox">-->
                         <form class="navbar-form navbar-left" id="searchBox">
                             <div class="form-group">
                                 <input type="text" class="form-control" ng-model="search" placeholder="Search" id="search">
                             </div>
                         </form>
-                        <!--</div>-->
                     </li>
                     <li>
                         <form class="navbar-form navbar-left" id="sortBox">
@@ -60,9 +57,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 </div>
 
@@ -70,9 +65,6 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>-->
                 <h3>Đăng xuất</h3>
             </div>
             <div class="modal-body">

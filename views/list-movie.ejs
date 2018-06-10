@@ -4,27 +4,17 @@
 <% include ./share/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/list-movie.css">
     <script src="/javascripts/list-movie.js"></script>
-    <!--<script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>-->
     <title>Cinema</title>
-
     <body ng-controller="movieController">
-        <!--<button onClick="meow()">Meow</button>-->
         <header>
             <% include ./share/header.ejs %>
         </header>
         <div class="wrapper">
             <div class="container">
-                <!-- Tooltip: data-toggle="tooltip"
-                    id="movie" title="<h3>{{movie.title}}</h3> <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
-                    data-placement="bottom" -->
                 <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)" data-toggle="tooltip"
                 id="movie" title="<h3>{{movie.title}}</h3><h4>({{movie.release}})</h4>  <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
                 data-placement="auto right">
-                    <image class="img-responsive cover" src={{movie.cover}}>
+                    <image class="img-responsive cover" ng-src="movie.cover" onerror="this.src = '/images/favicon.png'">
                         <h2 class="info">
                             {{movie.title}}
                         </h2>
@@ -35,5 +25,4 @@
             <% include ./share/footer.ejs %>
         </footer>
     </body>
-
 </html>

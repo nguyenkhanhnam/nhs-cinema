@@ -105,5 +105,7 @@ module.exports = {
   MOVIE_LIST_NOT_FOUND: 'Movie list not found',
   DELETE_MOVIE_SUCCESS: 'Delete movie successfully',
   CREATE_MOVIE_SUCCESS: 'Create movie successfully',
-  EDIT_MOVIE_SUCCESS: 'Edit movie successfully'
+  EDIT_MOVIE_SUCCESS: 'Edit movie successfully',
+
+  EDIT_PROFILE_SUCCESS: 'Edit profile successfully'
 }
