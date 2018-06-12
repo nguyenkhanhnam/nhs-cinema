@@ -100,6 +100,8 @@ module.exports = {
   SIGN_UP_SUCCESS: 'Sign up successfully',
   UPDATE_INFO_USER_SUCCESS: 'Update information successfully',
   AUTHENTICATE_FAIL: 'Failed to authenticate',
+  CHANGE_PASSWORD_SUCCESS: 'Change password successfully',
+  EMAIL_SENT: 'Email sent',
 
   MOVIE_NOT_FOUND: 'Movie not found',
   MOVIE_LIST_NOT_FOUND: 'Movie list not found',

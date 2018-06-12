@@ -173,6 +173,38 @@ Mobile, after logged in successfully, must store `token` into `headers['x-access
 #### Error Response
 { status: `<Number>`, errorMessage: `<String>` } <br>
 
+### 2.5 '/api/v1/auth/change-password' [All]
+`POST` - Change password <br>
+#### Request Params
+`oldPassword`: Current password `<String>` (required)
+`password`: New password `<String>` (required)
+#### Request Example
+```json
+{
+  "oldPassword": "oldPassword",
+  "password": "newPassword"
+}
+```
+#### Success Response
+{ status: `200`, message: `Change password successfully` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>
+
+### 2.6 '/api/v1/auth/request-reset-password' [All]
+`POST` - Request reset password / forgot password<br>
+#### Request Params
+`email`: Email `<String>` (required)
+#### Request Example
+```json
+{
+  "email": "test1@cinema.com"
+}
+```
+#### Success Response
+{ status: `200`, message: `Email sent` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>
+
 **3. API USERS**
 ----
 ### 3.1 '/api/v1/users/' [All]

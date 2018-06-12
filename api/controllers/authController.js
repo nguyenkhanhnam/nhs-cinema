@@ -1,9 +1,9 @@
-var Users = require('../models/userModel')
-// var nodemailer = require('nodemailer')
-// var ejs = require('ejs')
-var configs = require('../../configs')
-var responseStatus = require('../configs/responseStatus')
-var jwt = require('jsonwebtoken')
+const Users = require('../models/userModel')
+const nodemailer = require('nodemailer')
+const ejs = require('ejs')
+const configs = require('../../configs')
+const responseStatus = require('../configs/responseStatus')
+const jwt = require('jsonwebtoken')
 
 function signUp (email, username, password) {
   return new Promise((resolve, reject) => {
@@ -61,9 +61,101 @@ function signIn (email, password) {
   })
 }
 
+function changePassword (user, oldPassword, newPassword) {
+  return new Promise((resolve, reject) => {
+    const email = user.email
+    signIn(email, oldPassword)
+      .then(resolve1 => {
+        user.set({ password: newPassword })
+        user.set({ resetPasswordToken: undefined })
+        user.set({ resetPasswordExpires: undefined })
+        user.save(function (err, user) {
+          if (err) {
+            return reject(responseStatus.Code500(err))
+          }
+          return resolve(responseStatus.Code200({ message: responseStatus.CHANGE_PASSWORD_SUCCESS }))
+        })
+      })
+      .catch(reject1 => {
+        reject1.errorMessage = responseStatus.WRONG_PASSWORD
+        return reject(reject1)
+      })
+  })
+}
+
+function createRandomToken () { // https://stackoverflow.com/a/1349426
+  var text = ''
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  for (var i = 0; i < 10; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return text
+}
+
+function sendResetPasswordEmail (user) {
+  return new Promise((resolve, reject) => {
+    var smtpTransport = nodemailer.createTransport({
+      service: 'Yahoo',
+      auth: {
+        user: 'nguyenkhanhnam_13@yahoo.com.vn',
+        pass: 'qlcnlzmuqqucnqdt'
+      }
+    })
+
+    var resetPasswordLink = configs.domainName + '/reset/' + user.resetPasswordToken
+    var content = ejs.render('<div style="font-family: Montserrat, sans-serif;"> <h1> Hi, <strong><%=username%></strong>!</h1> <h3 style="color:gray;"> <b>There was a request to change your password.</b> </h3> <p>If you did not make this request, just ignore this email. Otherwise, please click the button below to change your password:</p> <div style="margin: 10px auto; width: 500px"> <a href=<%=link%> style="cursor: pointer"> <button style="font-size: 17px; width: 300px; color: white; border-radius: 10px; padding: 10px 20px; background-color: #1886C4; border-color: #1886C4;"> <b>Change password</b> </button> </a> </div> <i>LOVE,</i> <br> <i>Cinema</i> </div>', { username: user.username, link: resetPasswordLink })
+
+    var mailOptions = {
+      to: user.email,
+      from: 'nguyenkhanhnam_13@yahoo.com.vn',
+      subject: 'NHS Cinema Password Reset',
+      html: content
+    }
+    smtpTransport.sendMail(mailOptions, function (err, info) {
+      if (err) {
+        console.log(err)
+        return reject(responseStatus.Code500(err))
+      } else {
+        return resolve(responseStatus.Code200({ message: responseStatus.EMAIL_SENT }))
+      }
+    })
+  })
+}
+
+function requestResetPasswordEmail (email) {
+  return new Promise((resolve, reject) => {
+    Users.findOne({ email: email }, function (err, user) {
+      if (err) {
+        return reject(responseStatus.Code500(err))
+      }
+      if (!user) {
+        return reject(responseStatus.Code404({ errorMessage: responseStatus.USER_NOT_FOUND }))
+      }
+      // ref: http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/
+      var resetPasswordToken = createRandomToken()
+      var resetPasswordExpires = Date.now() + 3600000 // 1 hour
+      user.resetPasswordToken = resetPasswordToken
+      user.resetPasswordExpires = resetPasswordExpires
+
+      user.save(function (err, user) {
+        if (err) return reject(responseStatus.Code500(err))
+        sendResetPasswordEmail(user)
+          .then(resolve1 => {
+            return resolve(resolve1)
+          })
+          .catch(reject1 => {
+            return reject(reject1)
+          })
+      })
+    })
+  })
+}
+
 module.exports = {
   signUp: signUp,
-  signIn: signIn
+  signIn: signIn,
+  changePassword: changePassword,
+  requestResetPasswordEmail: requestResetPasswordEmail
 }
 
 // module.exports = function (app) {

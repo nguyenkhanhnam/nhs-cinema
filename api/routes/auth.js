@@ -6,6 +6,7 @@ var configs = require('../../configs')
 var authController = require('../controllers/authController')
 var jwt = require('jsonwebtoken')
 var responseStatus = require('../configs/responseStatus')
+const AuthService = require('../services/AuthService')
 
 router.post('/sign-up', function (req, res) {
   const email = req.body.email
@@ -77,5 +78,36 @@ router.get('/google/callback',
   function (req, res) {
     res.redirect('/')
   })
+
+router.post('/change-password', function (req, res) {
+  const token = AuthService.getTokenFromReq(req)
+  AuthService.isLogined(token)
+    .then(resolve => {
+      const user = resolve.user
+      const newPassword = req.body.password
+      const oldPassword = req.body.oldPassword
+      authController.changePassword(user, oldPassword, newPassword)
+        .then(resolve => {
+          return res.send(resolve)
+        })
+        .catch(reject => {
+          return res.status(reject.status).send(reject)
+        })
+    })
+    .catch(reject => {
+      return res.status(reject.status).send(reject)
+    })
+})
+
+router.post('/request-reset-password', function (req, res) {
+  const email = req.body.email || ''
+  authController.requestResetPasswordEmail(email)
+    .then(resolve => {
+      return res.send(resolve)
+    })
+    .catch(reject => {
+      return res.status(reject.status).send(reject)
+    })
+})
 
 module.exports = router
