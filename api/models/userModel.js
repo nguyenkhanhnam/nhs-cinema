@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-
+const constant = require('../configs/constant')
 var Schema = mongoose.Schema
 
 // For Password Authentication
@@ -19,9 +19,18 @@ var userSchema = new Schema({
   password: {
     type: String
   },
-  phone: Number,
-  avatar: String,
-  provider: String,
+  phone: {
+    type: String,
+    default: ''
+  },
+  avatar: {
+    type: String,
+    default: constant.AVATAR_DEFAULT
+  },
+  provider: {
+    type: String,
+    default: constant.provider.EMAIL
+  },
   resetPasswordToken: String,
   resetPasswordExpires: Date
 })
