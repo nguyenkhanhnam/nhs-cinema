@@ -109,5 +109,7 @@ module.exports = {
   CREATE_MOVIE_SUCCESS: 'Create movie successfully',
   EDIT_MOVIE_SUCCESS: 'Edit movie successfully',
 
-  EDIT_PROFILE_SUCCESS: 'Edit profile successfully'
+  EDIT_PROFILE_SUCCESS: 'Edit profile successfully',
+
+  INVALID_REQUEST: 'Invalid request'
 }

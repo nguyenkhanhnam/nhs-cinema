@@ -231,4 +231,11 @@ Mobile, after logged in successfully, must store `token` into `headers['x-access
 #### Success Response
 { status: `200`, message: `Edit profile successfully` } <br>
 #### Error Response
-{ status: `<Number>`, errorMessage: `<String>` } <br
+{ status: `<Number>`, errorMessage: `<String>` } <br>
+
+### 3.3 '/api/v1/users/:id/movies' [All]
+`GET` - Get movie list of 1 user <br>
+#### Success Response
+{ status: `200`, movies: `<Movie Array>` } <br>
+#### Error Response
+{ status: `<Number>`, errorMessage: `<String>` } <br>

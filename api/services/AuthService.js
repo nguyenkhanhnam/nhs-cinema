@@ -36,12 +36,12 @@ function canAccessMovie (token, movieId) {
     this.isLogined(token).then(_resolve => {
       Movies.findById(movieId.toString(), (err, movie) => {
         if (err) {
-          return reject(responseStatus.Code500())
+          return reject(responseStatus.Code500(err))
         }
         if (!movie) {
           return reject(responseStatus.Code404({ errorMessage: responseStatus.MOVIE_NOT_FOUND }))
         }
-        var user = resolve.user
+        var user = _resolve.user
         if (user._id.toString() === movie.creator.toString()) {
           return resolve(responseStatus.Code200({ user: user, movie: movie }))
         }
