@@ -51,6 +51,10 @@ You will also see any lint errors in the console.
 To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Heroku](https://devcenter.heroku.com/articles/deploying-nodejs).
 
 ## API DOCUMENTATION
+- Domain API: `https://nam-cinema.herokuapp.com/`
+- Kết quả trả về thành công mặc định có { `status`: 200 }
+- Kết quả trả về thất bại mặc định có { `status`: <Number>, `errorMessage`: <String> }
+
 **1. API MOVIES**
 ----
 ### 1.1 '/api/v1/movies/' [All]
