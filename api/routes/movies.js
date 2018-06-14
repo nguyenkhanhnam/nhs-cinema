@@ -46,7 +46,6 @@ router.post('/', function (req, res) {
         .catch(reject => {
           return res.status(reject.status).send(reject)
         })
-      return res.status(reject.status).send(reject)
     })
 })
 
