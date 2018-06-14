@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="container">
                     <div class="container col-lg-4 movie text-center">
-                        <image class="img-responsive cover" src={{movie.cover}}>
+                        <image class="img-responsive cover" ng-src="{{movie.cover}}" onerror="this.src = '/images/favicon.png'">
                     </div>
                     <div class="container col-lg-8 info">
                         <h1 class="title">{{movie.title}}</h1>

@@ -14,7 +14,7 @@
                 <div class="container col-lg-4 movie text-center" ng-repeat="movie in movies" ng-click="getDetail(movie._id)" data-toggle="tooltip"
                 id="movie" title="<h3>{{movie.title}}</h3><h4>({{movie.release}})</h4>  <p>Genre: {{movie.genre}} </p> <p>Description: {{movie.description}}</p>"
                 data-placement="auto right">
-                    <image class="img-responsive cover" ng-src="movie.cover" onerror="this.src = '/images/favicon.png'">
+                    <image class="img-responsive cover" ng-src="{{movie.cover}}" onerror="this.src = '/images/favicon.png'">
                         <h2 class="info">
                             {{movie.title}}
                         </h2>
