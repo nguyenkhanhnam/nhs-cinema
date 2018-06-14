@@ -1,2 +1,5 @@
 node_modules/
-public/images/
+public/images/*
+!public/images/avatar-user.png
+!public/images/cover.png
+!public/images/favicon.png
