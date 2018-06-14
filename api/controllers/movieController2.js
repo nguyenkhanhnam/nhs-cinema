@@ -3,7 +3,7 @@ const responseStatus = require('../configs/responseStatus')
 const path = require('path')
 const common = require('./common')
 
-function addMovie (req, userCreatedId) {
+function addMovie(req, userCreatedId) {
   return new Promise((resolve, reject) => {
     if (!req.files || !req.files.cover || !req.body.title || !req.body.genre || !req.body.release) {
       return reject(responseStatus.Code400())
@@ -39,7 +39,7 @@ function addMovie (req, userCreatedId) {
   })
 }
 
-function deleteMovie (id) {
+function deleteMovie(id) {
   return new Promise((resolve, reject) => {
     Movies.remove({ _id: id }, function (err) {
       if (err) {
@@ -51,7 +51,7 @@ function deleteMovie (id) {
   })
 }
 
-function editMovie (req, movie) {
+function editMovie(req, movie) {
   return new Promise((resolve, reject) => {
     movie.title = req.body.title || movie.title
     movie.genre = req.body.genre || movie.genre
@@ -87,23 +87,24 @@ function editMovie (req, movie) {
   })
 }
 
-function getMovie (id) {
+function getMovie(id) {
   return new Promise((resolve, reject) => {
-    Movies.findById(id.toString(), function (err, movie) {
-      if (err) {
-        return reject(responseStatus.Code500(err))
-      }
-      if (!movie) {
-        return reject(responseStatus.Code404({ errorMessage: responseStatus.MOVIE_NOT_FOUND }))
-      }
-      return resolve(responseStatus.Code200({ movie: movie }))
-    })
+    Movies.findById(id.toString()).populate('creator', 'username avatar email')
+      .exec(function (err, movie) {
+        if (err) {
+          return reject(responseStatus.Code500(err))
+        }
+        if (!movie) {
+          return reject(responseStatus.Code404({ errorMessage: responseStatus.MOVIE_NOT_FOUND }))
+        }
+        return resolve(responseStatus.Code200({ movie: movie }))
+      })
   })
 }
 
-function getMovies () {
+function getMovies() {
   return new Promise((resolve, reject) => {
-    Movies.find(function (err, movies) {
+    Movies.find().populate('creator', 'username avatar email').exec(function (err, movies) {
       if (err) {
         return reject(responseStatus.Code500(err))
       }
@@ -115,7 +116,7 @@ function getMovies () {
   })
 }
 
-function saveEditMovie (movie) {
+function saveEditMovie(movie) {
   return new Promise((resolve, reject) => {
     movie.save(function (err, movie) {
       if (err) {
