@@ -62,7 +62,7 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 #### Request Params
 `title`: Movie title `<String>` (required)
 `genre`: Movie genre `<String>` (required)
-`release`: Movie release date `<String: YYYY/MM>` (required)
+`release`: Movie release date `<String: DD/MM/YYYY>` (required)
 `cover`: Movie cover `<FILE>` (required)
 `description`: Movie description `<String>`
 #### Request Example
@@ -90,7 +90,26 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 ### 1.3 '/api/v1/movies/:id' [All]
 `GET` - Get 1 movie by _id <br>
 #### Success Response
-{ movie: `<Movies Object>` } <br>
+{ status: `200`, movie: `<Movies Object>` } <br>
+#### Sample response
+```json
+{
+    "status": 200,
+    "movie": {
+        "title": "The Godfather II",
+        "release": "12/1974",
+        "genre": "Crime",
+        "cover": `<URL>`,
+        "description": "The Godfather Part II is a 1974 American crime film produced and directed by Francis Ford Coppola from a screenplay co-written with Mario Puzo",
+        "creator": {
+            "email": "test1@cinema.com",
+            "username": "Test Cinema",
+            "avatar": `<URL>`
+        },
+        "_id": "5acb06080871a8296c6ee1ts"
+    }
+}
+```
 #### Error Response
 { errorMessage: `<String>` } <br>
 
@@ -99,7 +118,7 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 #### Request Params
 `title`: Movie title `<String>`
 `genre`: Movie genre `<String>`
-`release`: Movie release date `<String: YYYY/MM>`
+`release`: Movie release date `<String: DD/MM/YYYY>`
 `cover`: Movie cover `<FILE>`
 `description`: Movie description `<String>`
 #### Request Example
