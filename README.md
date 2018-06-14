@@ -95,7 +95,7 @@ To deploy on Heroku, you can find instructions in [Deploying Node.js Apps on Her
 { errorMessage: `<String>` } <br>
 
 ### 1.4 '/api/v1/movies/:id' [All]
-`PUT` - Create movie <br>
+`PUT` - Edit movie <br>
 #### Request Params
 `title`: Movie title `<String>`
 `genre`: Movie genre `<String>`
