@@ -8,7 +8,8 @@ var movieSchema = new Schema({
   release: String,
   description: String,
   cover: String,
-  creator: String
+  creator: String,
+  createdAt: String
 })
 
 var Movies = mongoose.model('Movies', movieSchema)

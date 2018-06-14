@@ -1,6 +1,7 @@
 var Movies = require('../models/movieModel')
 const responseStatus = require('../configs/responseStatus')
 const path = require('path')
+const common = require('./common')
 
 function addMovie (req, userCreatedId) {
   return new Promise((resolve, reject) => {
@@ -21,7 +22,8 @@ function addMovie (req, userCreatedId) {
           release: req.body.release,
           description: req.body.description || '',
           cover: `/images/${fileName}`,
-          creator: userCreatedId
+          creator: userCreatedId,
+          createdAt: common.timestampToString(Date.now())
         }
         Movies.create(newMovie, function (err) {
           if (err) {
