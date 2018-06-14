@@ -38,6 +38,14 @@ router.post('/', function (req, res) {
         })
     })
     .catch(reject => {
+      const userId = ''
+      movieController.addMovie(req, userId)
+        .then(resolve => {
+          return res.send(resolve)
+        })
+        .catch(reject => {
+          return res.status(reject.status).send(reject)
+        })
       return res.status(reject.status).send(reject)
     })
 })
