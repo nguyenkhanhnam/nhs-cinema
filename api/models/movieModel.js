@@ -8,9 +8,12 @@ var movieSchema = new Schema({
   release: String,
   description: String,
   cover: String,
+  creatorId: String,
   creator: {
-    type: Schema.Types.ObjectId,
-    ref: 'Users'
+    username: String,
+    _id: String,
+    avatar: String,
+    email: String
   },
   createdAt: String
 })

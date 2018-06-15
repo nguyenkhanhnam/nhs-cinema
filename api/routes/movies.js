@@ -28,8 +28,8 @@ router.post('/', function (req, res) {
   const token = AuthService.getTokenFromReq(req)
   AuthService.isLogined(token)
     .then(resolve => {
-      const userId = resolve.user._id || ''
-      movieController.addMovie(req, userId)
+      const user = resolve.user
+      movieController.addMovie(req, user)
         .then(resolve => {
           return res.send(resolve)
         })
@@ -38,8 +38,7 @@ router.post('/', function (req, res) {
         })
     })
     .catch(reject => {
-      const userId = ''
-      movieController.addMovie(req, userId)
+      movieController.addMovie(req, null)
         .then(resolve => {
           return res.send(resolve)
         })

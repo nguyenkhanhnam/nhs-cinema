@@ -3,7 +3,7 @@ const responseStatus = require('../configs/responseStatus')
 const path = require('path')
 const common = require('./common')
 
-function addMovie (req, userCreatedId) {
+function addMovie (req, user) {
   return new Promise((resolve, reject) => {
     if (!req.files || !req.files.cover || !req.body.title || !req.body.genre || !req.body.release) {
       return reject(responseStatus.Code400())
@@ -22,7 +22,13 @@ function addMovie (req, userCreatedId) {
           release: req.body.release,
           description: req.body.description || '',
           cover: `/images/${fileName}`,
-          creator: userCreatedId,
+          creatorId: user ? user._id : '',
+          creator: {
+            _id: user ? user._id : '',
+            avatar: user ? user.avatar : '',
+            username: user ? user.username : '',
+            email: user ? user.email : ''
+          },
           createdAt: common.timestampToString(Date.now())
         }
         Movies.create(newMovie, function (err) {
@@ -89,7 +95,7 @@ function editMovie (req, movie) {
 
 function getMovie (id) {
   return new Promise((resolve, reject) => {
-    Movies.findById(id.toString()).populate('creator', 'username avatar email')
+    Movies.findById(id.toString())// .populate('creator', 'username avatar email')
       .exec(function (err, movie) {
         if (err) {
           return reject(responseStatus.Code500(err))
@@ -104,7 +110,16 @@ function getMovie (id) {
 
 function getMovies () {
   return new Promise((resolve, reject) => {
-    Movies.find().populate('creator', 'username avatar email').exec(function (err, movies) {
+    // Movies.find().populate('creator', 'username avatar email').exec(function (err, movies) {
+    //   if (err) {
+    //     return reject(responseStatus.Code500(err))
+    //   }
+    //   if (!movies) {
+    //     return reject(responseStatus.Code404({ errorMessage: responseStatus.MOVIE_LIST_NOT_FOUND }))
+    //   }
+    //   return resolve(responseStatus.Code200({ movies: movies }))
+    // })
+    Movies.find().exec(function (err, movies) {
       if (err) {
         return reject(responseStatus.Code500(err))
       }
@@ -117,7 +132,7 @@ function getMovies () {
 }
 
 async function getUserMovies (id) {
-  return Movies.find({creator: id}).populate('creator', 'username avatar email')
+  return Movies.find({creatorId: id})// .populate('creator', 'username avatar email')
 }
 
 function saveEditMovie (movie) {

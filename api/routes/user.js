@@ -22,7 +22,7 @@ router.get('/:id/movies', async (req, res) => {
     const token = AuthService.getTokenFromReq(req)
     const user = (await AuthService.isLogined(token)).user
     const movies = await movieController.getUserMovies(user._id)
-    return res.send({movies: movies})
+    return res.send(responseStatus.Code200({ movies: movies }))
   } catch (error) {
     console.log(error)
     return res.status(error.status || 500).send(error)
