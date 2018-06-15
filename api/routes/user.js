@@ -3,6 +3,7 @@ var router = express.Router()
 const AuthService = require('../services/AuthService')
 const responseStatus = require('../configs/responseStatus')
 const userController = require('../controllers/userController2')
+const movieController = require('../controllers/movieController2')
 
 router.get('/', function (req, res) {
   const token = AuthService.getTokenFromReq(req)
@@ -14,6 +15,18 @@ router.get('/', function (req, res) {
     .catch(reject => {
       return res.status(reject.status).send(reject)
     })
+})
+
+router.get('/:id/movies', async (req, res) => {
+  try {
+    const token = AuthService.getTokenFromReq(req)
+    const user = (await AuthService.isLogined(token)).user
+    const movies = await movieController.getUserMovies(user._id)
+    return res.send({movies: movies})
+  } catch (error) {
+    console.log(error)
+    return res.status(error.status || 500).send(error)
+  }
 })
 
 router.put('/', function (req, res) {
